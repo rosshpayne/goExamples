@@ -1,0 +1,81 @@
+package main
+
+import (
+      "fmt"
+      "reflect"
+      "unicode/utf8"
+       )
+var genrune []rune
+
+//  string is an immutable sequence of bytes.
+//  Text strings are interpreted as UTF8-encode sequence of Unicode case points - runes.
+//
+func main () {
+      s := string("the c\aat sat on the mat");
+      t := s
+      s = string("..and now its different");
+      fmt.Println("t = ",t)
+      fmt.Println("s = ",s)
+      fmt.Println(s[4:8])
+      fmt.Println("len: ",len(s))          // strings have no cap (capacity) - its just one array all of which is visible.
+      //
+      s = "go/src/gopl.io"
+      fmt.Println(s[4:8])
+      fmt.Println("len: ",len(s))
+      //
+      s2 := s[:5]                         // new string
+      fmt.Println(s2)
+      fmt.Println("len: ",len(s2))
+      fmt.Printf("%T\n",s2)
+      //
+      s = "Left foot"
+      t = s
+//      s += ", right foot"
+      fmt.Println("len s: ",len(s),s) 
+      fmt.Println("len t: ",len(t),t)
+      //
+      ps , pt := &s, &t                    // pointers to string 
+      fmt.Println("*ps : ",*ps)
+      fmt.Println("*pt : ",*pt)
+      fmt.Printf("ps: %p\n",ps);
+      fmt.Printf("pt: %p\n",pt);
+      if ps == pt {
+         fmt.Println(" ps == pt")
+      } else {
+         fmt.Println(" ps != pt")        // ptrs are different - even though they have same underlying representation.
+      }                                  // is the ptr pointing to the struct {data,len}??
+      //
+      t2 := t[5:8]
+      pt2 := &t2
+      fmt.Println(*pt2, *pt)
+      fmt.Printf("pt2 type: %T\n",pt2);
+      fmt.Printf("pt : %p\n",pt);
+      fmt.Printf("pt2: %p\n",pt2);
+      if pt == pt2 {
+         fmt.Println(" pt == pt2")
+      } else {
+         fmt.Println(" pt != pt2")
+      }
+      //
+      rt:=reflect.TypeOf(pt)
+      rtelem := rt.Elem();
+      fmt.Println(rt.Kind())
+      fmt.Println(rtelem.Kind())
+      //
+     const nihongo = "日本語"
+     // strings are simply an ordered sequence of bytes []byte
+     // only string literals & Go code are interpreted as UTF8
+     for i:=0; i<len(nihongo); i++ {
+           fmt.Printf("%d  %X %d %c\n",i,nihongo[i], nihongo[i],nihongo[i])
+     } 
+     // range operator interpretes string as UTF8
+     for index, runeValue := range nihongo {
+           fmt.Printf("%#U starts at byte position %d\n", runeValue, index)
+    }
+    // alternatively, use unicate/utf8 package to interpret string as UTF8
+    for i, w := 0, 0; i < len(nihongo); i += w {
+        runeValue, width := utf8.DecodeRuneInString(nihongo[i:])
+        fmt.Printf("%#U starts at byte position %d\n", runeValue, i)
+        w = width
+    }
+}

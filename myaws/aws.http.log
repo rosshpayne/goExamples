@@ -1,0 +1,1251 @@
+
+
+*****************^^^^^^^^^*****************
+
+DEBUG: Request dynamodb/ListTables Details:
+---[ REQUEST POST-SIGN ]-----------------------------
+POST / HTTP/1.1
+Host: dynamodb.ap-southeast-2.amazonaws.com
+User-Agent: aws-sdk-go/1.12.30 (go1.8.1; darwin; amd64)
+Content-Length: 2
+Accept-Encoding: identity
+Authorization: AWS4-HMAC-SHA256 Credential=AKIAJDRVEI6FZVLYJ2XQ/20171127/ap-southeast-2/dynamodb/aws4_request, SignedHeaders=accept-encoding;content-length;content-type;host;x-amz-date;x-amz-target, Signature=5afadedc0556a16ce5bd78a3372701dd27d5d3cb2ba673b1b780d7063fab3264
+Content-Type: application/x-amz-json-1.0
+Customheader: 10
+X-Amz-Date: 20171127T001531Z
+X-Amz-Target: DynamoDB_20120810.ListTables
+
+{}
+-----------------------------------------------------
+DEBUG: Response dynamodb/ListTables Details:
+---[ RESPONSE ]--------------------------------------
+HTTP/1.1 200 OK
+Content-Length: 25
+Connection: keep-alive
+Content-Type: application/x-amz-json-1.0
+Date: Mon, 27 Nov 2017 00:15:31 GMT
+Server: Server
+X-Amz-Crc32: 4062568477
+X-Amzn-Requestid: MDCIQJSTD2R9DL2VD9SSGRUN5NVV4KQNSO5AEMVJF66Q9ASUAAJG
+
+
+-----------------------------------------------------
+{"TableNames":["Movies"]}
+
+
+*****************^^^^^^^^^*****************
+
+DEBUG: Request dynamodb/ListTables Details:
+---[ REQUEST POST-SIGN ]-----------------------------
+POST / HTTP/1.1
+Host: dynamodb.ap-southeast-2.amazonaws.com
+User-Agent: aws-sdk-go/1.12.30 (go1.8.1; darwin; amd64)
+Content-Length: 2
+Accept-Encoding: identity
+Authorization: AWS4-HMAC-SHA256 Credential=AKIAJDRVEI6FZVLYJ2XQ/20171127/ap-southeast-2/dynamodb/aws4_request, SignedHeaders=accept-encoding;content-length;content-type;host;x-amz-date;x-amz-target, Signature=ea6bcab5004bb45cf1884c568e64d2e5069caeca603921ae18abde1b08ae6edc
+Content-Type: application/x-amz-json-1.0
+Customheader: 10
+X-Amz-Date: 20171127T001618Z
+X-Amz-Target: DynamoDB_20120810.ListTables
+
+{}
+-----------------------------------------------------
+DEBUG: Response dynamodb/ListTables Details:
+---[ RESPONSE ]--------------------------------------
+HTTP/1.1 200 OK
+Content-Length: 25
+Connection: keep-alive
+Content-Type: application/x-amz-json-1.0
+Date: Mon, 27 Nov 2017 00:16:18 GMT
+Server: Server
+X-Amz-Crc32: 4062568477
+X-Amzn-Requestid: 22U9PPEV6O777V6V5DDHUNLAB7VV4KQNSO5AEMVJF66Q9ASUAAJG
+
+
+-----------------------------------------------------
+{"TableNames":["Movies"]}
+DEBUG: Request dynamodb/ListTables Details:
+---[ REQUEST POST-SIGN ]-----------------------------
+POST /?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAJDRVEI6FZVLYJ2XQ%2F20171127%2Fap-southeast-2%2Fdynamodb%2Faws4_request&X-Amz-Date=20171127T001736Z&X-Amz-Expires=9900&X-Amz-Signature=cd1f831a5f5fb56dc5242b375fd3ca6e172740ffb1e6a3b860dc0aabf75d5ac3&X-Amz-SignedHeaders=accept-encoding%3Bcontent-length%3Bcontent-type%3Bhost&X-Amz-Target=DynamoDB_20120810.ListTables HTTP/1.1
+Host: dynamodb.ap-southeast-2.amazonaws.com
+User-Agent: aws-sdk-go/1.12.30 (go1.8.1; darwin; amd64) aws-sdk-go/1.12.30 (go1.8.1; darwin; amd64)
+Content-Length: 2
+Accept-Encoding: identity
+Authorization: AWS4-HMAC-SHA256 Credential=AKIAJDRVEI6FZVLYJ2XQ/20171127/ap-southeast-2/dynamodb/aws4_request, SignedHeaders=accept-encoding;content-length;content-type;host;x-amz-date;x-amz-target, Signature=8830d80e5a16539c9a531519032f9a0d3c7048fc23a260ba9dbd49bac0b33e95
+Content-Type: application/x-amz-json-1.0
+Content-Type: application/x-amz-json-1.0
+Customheader: 10
+X-Amz-Date: 20171127T001736Z
+X-Amz-Target: DynamoDB_20120810.ListTables
+X-Amz-Target: DynamoDB_20120810.ListTables
+
+{}
+-----------------------------------------------------
+DEBUG: Response dynamodb/ListTables Details:
+---[ RESPONSE ]--------------------------------------
+HTTP/1.1 400 Bad Request
+Content-Length: 164
+Connection: keep-alive
+Content-Type: application/x-amz-json-1.0
+Date: Mon, 27 Nov 2017 00:17:36 GMT
+Server: Server
+X-Amz-Crc32: 2139606068
+X-Amzn-Requestid: V21MQNROTGM1N36OEF07GP2DHFVV4KQNSO5AEMVJF66Q9ASUAAJG
+
+
+-----------------------------------------------------
+{"__type":"com.amazon.coral.service#InvalidSignatureException","message":"Found both 'X-Amz-Algorithm' as a query-string param and 'Authorization' as HTTP header."}
+
+
+*****************^^^/var/folders/sx/x3v4bzz92l55c9j24c_gn9t40000gn/T/go-build760826904/command-line-arguments/_obj/exe/request^^^^*****************
+
+DEBUG: Request dynamodb/ListTables Details:
+---[ REQUEST POST-SIGN ]-----------------------------
+POST /?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAJDRVEI6FZVLYJ2XQ%2F20171127%2Fap-southeast-2%2Fdynamodb%2Faws4_request&X-Amz-Date=20171127T002151Z&X-Amz-Expires=9900&X-Amz-Signature=b8698d5ee2ea43549f730c1c5313d24032bff14b05636b4da164fe4bdd32832e&X-Amz-SignedHeaders=accept-encoding%3Bcontent-length%3Bcontent-type%3Bhost&X-Amz-Target=DynamoDB_20120810.ListTables HTTP/1.1
+Host: dynamodb.ap-southeast-2.amazonaws.com
+User-Agent: aws-sdk-go/1.12.30 (go1.8.1; darwin; amd64) aws-sdk-go/1.12.30 (go1.8.1; darwin; amd64)
+Content-Length: 2
+Accept-Encoding: identity
+Authorization: AWS4-HMAC-SHA256 Credential=AKIAJDRVEI6FZVLYJ2XQ/20171127/ap-southeast-2/dynamodb/aws4_request, SignedHeaders=accept-encoding;content-length;content-type;host;x-amz-date;x-amz-target, Signature=60a87d82cfd28698a19601f03c353b953db2d99c02c854ccfec58579e8896f2b
+Content-Type: application/x-amz-json-1.0
+Content-Type: application/x-amz-json-1.0
+Customheader: 10
+X-Amz-Date: 20171127T002151Z
+X-Amz-Target: DynamoDB_20120810.ListTables
+X-Amz-Target: DynamoDB_20120810.ListTables
+
+{}
+-----------------------------------------------------
+DEBUG: Response dynamodb/ListTables Details:
+---[ RESPONSE ]--------------------------------------
+HTTP/1.1 400 Bad Request
+Content-Length: 164
+Connection: keep-alive
+Content-Type: application/x-amz-json-1.0
+Date: Mon, 27 Nov 2017 00:21:51 GMT
+Server: Server
+X-Amz-Crc32: 2139606068
+X-Amzn-Requestid: AGF27PRSR7LQ7760L9IT414GMNVV4KQNSO5AEMVJF66Q9ASUAAJG
+
+
+-----------------------------------------------------
+{"__type":"com.amazon.coral.service#InvalidSignatureException","message":"Found both 'X-Amz-Algorithm' as a query-string param and 'Authorization' as HTTP header."}
+
+
+*****************^^^/request^^^^*****************
+
+DEBUG: Request dynamodb/ListTables Details:
+---[ REQUEST POST-SIGN ]-----------------------------
+POST /?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAJDRVEI6FZVLYJ2XQ%2F20171127%2Fap-southeast-2%2Fdynamodb%2Faws4_request&X-Amz-Date=20171127T002700Z&X-Amz-Expires=9900&X-Amz-Signature=a1f1636bc111770d04aae0836aedb09ef4186a705adc3bae2231eeab43ba2a6c&X-Amz-SignedHeaders=accept-encoding%3Bcontent-length%3Bcontent-type%3Bhost&X-Amz-Target=DynamoDB_20120810.ListTables HTTP/1.1
+Host: dynamodb.ap-southeast-2.amazonaws.com
+User-Agent: aws-sdk-go/1.12.30 (go1.8.1; darwin; amd64) aws-sdk-go/1.12.30 (go1.8.1; darwin; amd64)
+Content-Length: 2
+Accept-Encoding: identity
+Authorization: AWS4-HMAC-SHA256 Credential=AKIAJDRVEI6FZVLYJ2XQ/20171127/ap-southeast-2/dynamodb/aws4_request, SignedHeaders=accept-encoding;content-length;content-type;host;x-amz-date;x-amz-target, Signature=f3e661060d4d2c17a58f14fe5e5e08373e87cdc7c5699613f8ef06157e5fd143
+Content-Type: application/x-amz-json-1.0
+Content-Type: application/x-amz-json-1.0
+Customheader: 10
+X-Amz-Date: 20171127T002700Z
+X-Amz-Target: DynamoDB_20120810.ListTables
+X-Amz-Target: DynamoDB_20120810.ListTables
+
+{}
+-----------------------------------------------------
+DEBUG: Response dynamodb/ListTables Details:
+---[ RESPONSE ]--------------------------------------
+HTTP/1.1 400 Bad Request
+Content-Length: 164
+Connection: keep-alive
+Content-Type: application/x-amz-json-1.0
+Date: Mon, 27 Nov 2017 00:27:01 GMT
+Server: Server
+X-Amz-Crc32: 2139606068
+X-Amzn-Requestid: N5PQREV0TST6DKP1H45LPDCP9VVV4KQNSO5AEMVJF66Q9ASUAAJG
+
+
+-----------------------------------------------------
+{"__type":"com.amazon.coral.service#InvalidSignatureException","message":"Found both 'X-Amz-Algorithm' as a query-string param and 'Authorization' as HTTP header."}
+
+
+*****************^^^request^^^^*****************
+
+DEBUG: Request dynamodb/ListTables Details:
+---[ REQUEST POST-SIGN ]-----------------------------
+POST /?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAJDRVEI6FZVLYJ2XQ%2F20171127%2Fap-southeast-2%2Fdynamodb%2Faws4_request&X-Amz-Date=20171127T003026Z&X-Amz-Expires=9900&X-Amz-Signature=67cfa3a70861579069e95b036bb3b00ef83e943f1bcb7a5a6eb1c1177b1fd790&X-Amz-SignedHeaders=accept-encoding%3Bcontent-length%3Bcontent-type%3Bhost&X-Amz-Target=DynamoDB_20120810.ListTables HTTP/1.1
+Host: dynamodb.ap-southeast-2.amazonaws.com
+User-Agent: aws-sdk-go/1.12.30 (go1.8.1; darwin; amd64) aws-sdk-go/1.12.30 (go1.8.1; darwin; amd64)
+Content-Length: 2
+Accept-Encoding: identity
+Authorization: AWS4-HMAC-SHA256 Credential=AKIAJDRVEI6FZVLYJ2XQ/20171127/ap-southeast-2/dynamodb/aws4_request, SignedHeaders=accept-encoding;content-length;content-type;host;x-amz-date;x-amz-target, Signature=87714a6b669e95e8d0b75b4f7d6a5a6ec92b471f16bc34f17d643d81b6ab20bb
+Content-Type: application/x-amz-json-1.0
+Content-Type: application/x-amz-json-1.0
+Customheader: 10
+X-Amz-Date: 20171127T003026Z
+X-Amz-Target: DynamoDB_20120810.ListTables
+X-Amz-Target: DynamoDB_20120810.ListTables
+
+{}
+-----------------------------------------------------
+DEBUG: Response dynamodb/ListTables Details:
+---[ RESPONSE ]--------------------------------------
+HTTP/1.1 400 Bad Request
+Content-Length: 164
+Connection: keep-alive
+Content-Type: application/x-amz-json-1.0
+Date: Mon, 27 Nov 2017 00:30:26 GMT
+Server: Server
+X-Amz-Crc32: 2139606068
+X-Amzn-Requestid: S3I62P2KTMS4041ADSH4SB7N4FVV4KQNSO5AEMVJF66Q9ASUAAJG
+
+
+-----------------------------------------------------
+{"__type":"com.amazon.coral.service#InvalidSignatureException","message":"Found both 'X-Amz-Algorithm' as a query-string param and 'Authorization' as HTTP header."}
+
+****************************************************************
+DEBUG: Request dynamodb/ListTables Details:
+---[ REQUEST POST-SIGN ]-----------------------------
+POST / HTTP/1.1
+Host: dynamodb.ap-southeast-2.amazonaws.com
+User-Agent: aws-sdk-go/1.12.30 (go1.8.1; darwin; amd64)
+Content-Length: 2
+Accept-Encoding: identity
+Authorization: AWS4-HMAC-SHA256 Credential=AKIAJDRVEI6FZVLYJ2XQ/20171127/ap-southeast-2/dynamodb/aws4_request, SignedHeaders=accept-encoding;content-length;content-type;host;x-amz-date;x-amz-target, Signature=4009ac4483a971068bdd8288f5727ef1113043c7e23d144655bef45544b4f0f1
+Content-Type: application/x-amz-json-1.0
+Customheader: 10
+X-Amz-Date: 20171127T070359Z
+X-Amz-Target: DynamoDB_20120810.ListTables
+
+{}
+-----------------------------------------------------
+DEBUG: Response dynamodb/ListTables Details:
+---[ RESPONSE ]--------------------------------------
+HTTP/1.1 200 OK
+Content-Length: 25
+Connection: keep-alive
+Content-Type: application/x-amz-json-1.0
+Date: Mon, 27 Nov 2017 07:04:00 GMT
+Server: Server
+X-Amz-Crc32: 4062568477
+X-Amzn-Requestid: GHTE7I22GAG88E8TKIQ88VVGMJVV4KQNSO5AEMVJF66Q9ASUAAJG
+
+
+-----------------------------------------------------
+{"TableNames":["Movies"]}
+
+
+*****************^^^withcontext^^^^*****************
+
+DEBUG: Request dynamodb/ListTables Details:
+---[ REQUEST POST-SIGN ]-----------------------------
+POST / HTTP/1.1
+Host: dynamodb.ap-southeast-2.amazonaws.com
+User-Agent: aws-sdk-go/1.12.30 (go1.8.1; darwin; amd64)
+Content-Length: 2
+Accept-Encoding: identity
+Authorization: AWS4-HMAC-SHA256 Credential=AKIAJDRVEI6FZVLYJ2XQ/20171127/ap-southeast-2/dynamodb/aws4_request, SignedHeaders=accept-encoding;content-length;content-type;host;x-amz-date;x-amz-target, Signature=f8eb4c968e3d4229a956ef274b06b08076d2d0a53bdc81a977283f6deabfb201
+Content-Type: application/x-amz-json-1.0
+Customheader: 10
+X-Amz-Date: 20171127T070457Z
+X-Amz-Target: DynamoDB_20120810.ListTables
+
+{}
+-----------------------------------------------------
+DEBUG: Response dynamodb/ListTables Details:
+---[ RESPONSE ]--------------------------------------
+HTTP/1.1 200 OK
+Content-Length: 25
+Connection: keep-alive
+Content-Type: application/x-amz-json-1.0
+Date: Mon, 27 Nov 2017 07:04:58 GMT
+Server: Server
+X-Amz-Crc32: 4062568477
+X-Amzn-Requestid: QPJFDDJ5QBDD5ABF0NUGL1EEJNVV4KQNSO5AEMVJF66Q9ASUAAJG
+
+
+-----------------------------------------------------
+{"TableNames":["Movies"]}
+
+
+*****************^^^withcontext^^^^*****************
+
+DEBUG: Request dynamodb/ListTables Details:
+---[ REQUEST POST-SIGN ]-----------------------------
+POST / HTTP/1.1
+Host: dynamodb.ap-southeast-2.amazonaws.com
+User-Agent: aws-sdk-go/1.12.30 (go1.8.1; darwin; amd64)
+Content-Length: 2
+Accept-Encoding: identity
+Authorization: AWS4-HMAC-SHA256 Credential=AKIAJDRVEI6FZVLYJ2XQ/20171127/ap-southeast-2/dynamodb/aws4_request, SignedHeaders=accept-encoding;content-length;content-type;host;x-amz-date;x-amz-target, Signature=863cd5d571c6b7a544c83ebefc19ede86112183cd65c9b3dea2bdcced8008915
+Content-Type: application/x-amz-json-1.0
+Customheader: 10
+X-Amz-Date: 20171127T220151Z
+X-Amz-Target: DynamoDB_20120810.ListTables
+
+{}
+-----------------------------------------------------
+DEBUG: Response dynamodb/ListTables Details:
+---[ RESPONSE ]--------------------------------------
+HTTP/1.1 200 OK
+Content-Length: 25
+Connection: keep-alive
+Content-Type: application/x-amz-json-1.0
+Date: Mon, 27 Nov 2017 22:01:52 GMT
+Server: Server
+X-Amz-Crc32: 4062568477
+X-Amzn-Requestid: CTBEK901T719B68839C1T68H17VV4KQNSO5AEMVJF66Q9ASUAAJG
+
+
+-----------------------------------------------------
+{"TableNames":["Movies"]}
+
+
+*****************^^^withcontext^^^^*****************
+
+DEBUG: Request dynamodb/ListTables Details:
+---[ REQUEST POST-SIGN ]-----------------------------
+POST / HTTP/1.1
+Host: dynamodb.ap-southeast-2.amazonaws.com
+User-Agent: aws-sdk-go/1.12.30 (go1.8.1; darwin; amd64)
+Content-Length: 2
+Accept-Encoding: identity
+Authorization: AWS4-HMAC-SHA256 Credential=AKIAJDRVEI6FZVLYJ2XQ/20171127/ap-southeast-2/dynamodb/aws4_request, SignedHeaders=accept-encoding;content-length;content-type;host;x-amz-date;x-amz-target, Signature=7e6b47f1e933628f63ba7b9ed54dc985455fbc5ce0fba12812e161f188abaa50
+Content-Type: application/x-amz-json-1.0
+Customheader: 10
+X-Amz-Date: 20171127T220220Z
+X-Amz-Target: DynamoDB_20120810.ListTables
+
+{}
+-----------------------------------------------------
+DEBUG: Response dynamodb/ListTables Details:
+---[ RESPONSE ]--------------------------------------
+HTTP/1.1 200 OK
+Content-Length: 25
+Connection: keep-alive
+Content-Type: application/x-amz-json-1.0
+Date: Mon, 27 Nov 2017 22:02:20 GMT
+Server: Server
+X-Amz-Crc32: 4062568477
+X-Amzn-Requestid: DNSF3G721JQGLVFBISO2T284L3VV4KQNSO5AEMVJF66Q9ASUAAJG
+
+
+-----------------------------------------------------
+{"TableNames":["Movies"]}
+
+
+*****************^^^withcontext^^^^*****************
+
+
+
+*****************^^^withcontext^^^^*****************
+
+
+
+*****************^^^withcontext^^^^*****************
+
+
+
+*****************^^^withcontext^^^^*****************
+
+DEBUG: Request dynamodb/ListTables Details:
+---[ REQUEST POST-SIGN ]-----------------------------
+POST / HTTP/1.1
+Host: dynamodb.ap-southeast-2.amazonaws.com
+User-Agent: aws-sdk-go/1.12.30 (go1.8.1; darwin; amd64)
+Content-Length: 2
+Accept-Encoding: identity
+Authorization: AWS4-HMAC-SHA256 Credential=AKIAJDRVEI6FZVLYJ2XQ/20171127/ap-southeast-2/dynamodb/aws4_request, SignedHeaders=accept-encoding;content-length;content-type;host;x-amz-date;x-amz-target, Signature=7f8ab2103fbcf64dd45b58b7416c254335a01ad470d8fb1a0173f573fb50360e
+Content-Type: application/x-amz-json-1.0
+Customheader: 10
+X-Amz-Date: 20171127T223355Z
+X-Amz-Target: DynamoDB_20120810.ListTables
+
+{}
+-----------------------------------------------------
+DEBUG: Response dynamodb/ListTables Details:
+---[ RESPONSE ]--------------------------------------
+HTTP/1.1 200 OK
+Content-Length: 25
+Connection: keep-alive
+Content-Type: application/x-amz-json-1.0
+Date: Mon, 27 Nov 2017 22:33:56 GMT
+Server: Server
+X-Amz-Crc32: 4062568477
+X-Amzn-Requestid: ICKQGEFSQCGUFUC21DDJE6JN5NVV4KQNSO5AEMVJF66Q9ASUAAJG
+
+
+-----------------------------------------------------
+{"TableNames":["Movies"]}
+
+
+*****************^^^withcontext^^^^*****************
+
+DEBUG ERROR: Request dynamodb/ListTables:
+---[ REQUEST DUMP ERROR ]-----------------------------
+context canceled
+------------------------------------------------------
+
+
+*****************^^^withcontext^^^^*****************
+
+DEBUG ERROR: Request dynamodb/ListTables:
+---[ REQUEST DUMP ERROR ]-----------------------------
+context canceled
+------------------------------------------------------
+
+
+*****************^^^withcontext^^^^*****************
+
+DEBUG ERROR: Request dynamodb/ListTables:
+---[ REQUEST DUMP ERROR ]-----------------------------
+context canceled
+------------------------------------------------------
+
+
+*****************^^^withcontext^^^^*****************
+
+DEBUG ERROR: Request dynamodb/ListTables:
+---[ REQUEST DUMP ERROR ]-----------------------------
+context canceled
+------------------------------------------------------
+
+
+*****************^^^withcontext^^^^*****************
+
+DEBUG ERROR: Request dynamodb/ListTables:
+---[ REQUEST DUMP ERROR ]-----------------------------
+context canceled
+------------------------------------------------------
+
+
+*****************^^^withcontext^^^^*****************
+
+DEBUG: Request dynamodb/ListTables Details:
+---[ REQUEST POST-SIGN ]-----------------------------
+POST / HTTP/1.1
+Host: dynamodb.ap-southeast-2.amazonaws.com
+User-Agent: aws-sdk-go/1.12.30 (go1.8.1; darwin; amd64)
+Content-Length: 2
+Accept-Encoding: identity
+Authorization: AWS4-HMAC-SHA256 Credential=AKIAJDRVEI6FZVLYJ2XQ/20171127/ap-southeast-2/dynamodb/aws4_request, SignedHeaders=accept-encoding;content-length;content-type;host;x-amz-date;x-amz-target, Signature=4fc52884037a06fcb43019b145d82d1f77a85edf258ff181eca55bece0c9a56e
+Content-Type: application/x-amz-json-1.0
+Customheader: 10
+X-Amz-Date: 20171127T233804Z
+X-Amz-Target: DynamoDB_20120810.ListTables
+
+{}
+-----------------------------------------------------
+
+
+*****************^^^withcontext^^^^*****************
+
+DEBUG: Request dynamodb/ListTables Details:
+---[ REQUEST POST-SIGN ]-----------------------------
+POST / HTTP/1.1
+Host: dynamodb.ap-southeast-2.amazonaws.com
+User-Agent: aws-sdk-go/1.12.30 (go1.8.1; darwin; amd64)
+Content-Length: 2
+Accept-Encoding: identity
+Authorization: AWS4-HMAC-SHA256 Credential=AKIAJDRVEI6FZVLYJ2XQ/20171127/ap-southeast-2/dynamodb/aws4_request, SignedHeaders=accept-encoding;content-length;content-type;host;x-amz-date;x-amz-target, Signature=56bd5c19b45e22037b48465f329b6740f8961823aaa6cab6370aa6e9b257e853
+Content-Type: application/x-amz-json-1.0
+Customheader: 10
+X-Amz-Date: 20171127T233949Z
+X-Amz-Target: DynamoDB_20120810.ListTables
+
+{}
+-----------------------------------------------------
+DEBUG: Response dynamodb/ListTables Details:
+---[ RESPONSE ]--------------------------------------
+HTTP/1.1 200 OK
+Content-Length: 25
+Connection: keep-alive
+Content-Type: application/x-amz-json-1.0
+Date: Mon, 27 Nov 2017 23:39:49 GMT
+Server: Server
+X-Amz-Crc32: 4062568477
+X-Amzn-Requestid: UEU7C0UDTHBUBUO1B5GC58SR7NVV4KQNSO5AEMVJF66Q9ASUAAJG
+
+
+-----------------------------------------------------
+{"TableNames":["Movies"]}
+
+
+*****************^^^withcontext^^^^*****************
+
+DEBUG ERROR: Request dynamodb/ListTables:
+---[ REQUEST DUMP ERROR ]-----------------------------
+context canceled
+------------------------------------------------------
+
+
+*****************^^^withcontext^^^^*****************
+
+DEBUG: Request dynamodb/ListTables Details:
+---[ REQUEST POST-SIGN ]-----------------------------
+POST / HTTP/1.1
+Host: dynamodb.ap-southeast-2.amazonaws.com
+User-Agent: aws-sdk-go/1.12.30 (go1.8.1; darwin; amd64)
+Content-Length: 2
+Accept-Encoding: identity
+Authorization: AWS4-HMAC-SHA256 Credential=AKIAJDRVEI6FZVLYJ2XQ/20171127/ap-southeast-2/dynamodb/aws4_request, SignedHeaders=accept-encoding;content-length;content-type;host;x-amz-date;x-amz-target, Signature=d933dfbf568cb63cf99b6416b3337de1d2e35834560eb126acf7c5f14a665efa
+Content-Type: application/x-amz-json-1.0
+Customheader: 10
+X-Amz-Date: 20171127T234013Z
+X-Amz-Target: DynamoDB_20120810.ListTables
+
+{}
+-----------------------------------------------------
+DEBUG: Response dynamodb/ListTables Details:
+---[ RESPONSE ]--------------------------------------
+HTTP/1.1 200 OK
+Content-Length: 25
+Connection: keep-alive
+Content-Type: application/x-amz-json-1.0
+Date: Mon, 27 Nov 2017 23:40:14 GMT
+Server: Server
+X-Amz-Crc32: 4062568477
+X-Amzn-Requestid: CME6N3QVIDT8EQDFHBM5I7A8AFVV4KQNSO5AEMVJF66Q9ASUAAJG
+
+
+-----------------------------------------------------
+{"TableNames":["Movies"]}
+
+
+*****************^^^withcontext^^^^*****************
+
+DEBUG: Request dynamodb/ListTables Details:
+---[ REQUEST POST-SIGN ]-----------------------------
+POST / HTTP/1.1
+Host: dynamodb.ap-southeast-2.amazonaws.com
+User-Agent: aws-sdk-go/1.12.30 (go1.8.1; darwin; amd64)
+Content-Length: 2
+Accept-Encoding: identity
+Authorization: AWS4-HMAC-SHA256 Credential=AKIAJDRVEI6FZVLYJ2XQ/20171127/ap-southeast-2/dynamodb/aws4_request, SignedHeaders=accept-encoding;content-length;content-type;host;x-amz-date;x-amz-target, Signature=c45fa90ce27adbd7e35e5661a415e5cf153dfcd2aeaa5dbb595a6534fe636f44
+Content-Type: application/x-amz-json-1.0
+Customheader: 10
+X-Amz-Date: 20171127T234223Z
+X-Amz-Target: DynamoDB_20120810.ListTables
+
+{}
+-----------------------------------------------------
+DEBUG: Response dynamodb/ListTables Details:
+---[ RESPONSE ]--------------------------------------
+HTTP/1.1 200 OK
+Content-Length: 25
+Connection: keep-alive
+Content-Type: application/x-amz-json-1.0
+Date: Mon, 27 Nov 2017 23:42:23 GMT
+Server: Server
+X-Amz-Crc32: 4062568477
+X-Amzn-Requestid: RPLH48MUV5E6UT976QO3P8G6FNVV4KQNSO5AEMVJF66Q9ASUAAJG
+
+
+-----------------------------------------------------
+{"TableNames":["Movies"]}
+
+
+*****************^^^withcontext^^^^*****************
+
+DEBUG ERROR: Request dynamodb/ListTables:
+---[ REQUEST DUMP ERROR ]-----------------------------
+context canceled
+------------------------------------------------------
+
+
+*****************^^^^^^^^^*****************
+
+DEBUG: Request dynamodb/GetItem Details:
+---[ REQUEST POST-SIGN ]-----------------------------
+POST / HTTP/1.1
+Host: dynamodb.ap-southeast-2.amazonaws.com
+User-Agent: aws-sdk-go/1.12.30 (go1.8.1; darwin; amd64)
+Content-Length: 117
+Accept-Encoding: identity
+Authorization: AWS4-HMAC-SHA256 Credential=AKIAJDRVEI6FZVLYJ2XQ/20171128/ap-southeast-2/dynamodb/aws4_request, SignedHeaders=accept-encoding;content-length;content-type;host;x-amz-date;x-amz-target, Signature=2cf73b62319bc4f9a8e32505df8063374d82f7d75c888bc76e8cf314b357c95e
+Content-Type: application/x-amz-json-1.0
+X-Amz-Date: 20171128T034110Z
+X-Amz-Target: DynamoDB_20120810.GetItem
+
+{"Key":{"title":{"S":"The Big New Movie"},"year":{"N":"2015"}},"ReturnConsumedCapacity":"TOTAL","TableName":"Movies"}
+-----------------------------------------------------
+DEBUG: Response dynamodb/GetItem Details:
+---[ RESPONSE ]--------------------------------------
+HTTP/1.1 200 OK
+Content-Length: 199
+Connection: keep-alive
+Content-Type: application/x-amz-json-1.0
+Date: Tue, 28 Nov 2017 03:41:10 GMT
+Server: Server
+X-Amz-Crc32: 331066618
+X-Amzn-Requestid: 9OONDJLRDBU43BQU9SRRLSITBFVV4KQNSO5AEMVJF66Q9ASUAAJG
+
+
+-----------------------------------------------------
+{"ConsumedCapacity":{"CapacityUnits":0.5,"TableName":"Movies"},"Item":{"year":{"N":"2015"},"info":{"M":{"rating":{"N":"0"},"plot":{"S":"Nothing happens at all."}}},"title":{"S":"The Big New Movie"}}}
+
+
+*****************^^^^^^^^^*****************
+
+DEBUG: Request dynamodb/GetItem Details:
+---[ REQUEST POST-SIGN ]-----------------------------
+POST / HTTP/1.1
+Host: dynamodb.ap-southeast-2.amazonaws.com
+User-Agent: aws-sdk-go/1.12.30 (go1.8.1; darwin; amd64)
+Content-Length: 117
+Accept-Encoding: identity
+Authorization: AWS4-HMAC-SHA256 Credential=AKIAJDRVEI6FZVLYJ2XQ/20171128/ap-southeast-2/dynamodb/aws4_request, SignedHeaders=accept-encoding;content-length;content-type;host;x-amz-date;x-amz-target, Signature=839a5595b20c6a0e6eefd9f2d696727ccb80b1ffc4d0c2f5b076a585c392f2b0
+Content-Type: application/x-amz-json-1.0
+X-Amz-Date: 20171128T034323Z
+X-Amz-Target: DynamoDB_20120810.GetItem
+
+{"Key":{"title":{"S":"The Big New Movie"},"year":{"N":"2015"}},"ReturnConsumedCapacity":"TOTAL","TableName":"Movies"}
+-----------------------------------------------------
+DEBUG: Response dynamodb/GetItem Details:
+---[ RESPONSE ]--------------------------------------
+HTTP/1.1 200 OK
+Content-Length: 199
+Connection: keep-alive
+Content-Type: application/x-amz-json-1.0
+Date: Tue, 28 Nov 2017 03:43:24 GMT
+Server: Server
+X-Amz-Crc32: 331066618
+X-Amzn-Requestid: IO4VLM7BDLK2SL2VK8PVA6MI53VV4KQNSO5AEMVJF66Q9ASUAAJG
+
+
+-----------------------------------------------------
+{"ConsumedCapacity":{"CapacityUnits":0.5,"TableName":"Movies"},"Item":{"year":{"N":"2015"},"info":{"M":{"rating":{"N":"0"},"plot":{"S":"Nothing happens at all."}}},"title":{"S":"The Big New Movie"}}}
+
+
+*****************^^^^^^^^^*****************
+
+DEBUG: Request dynamodb/GetItem Details:
+---[ REQUEST POST-SIGN ]-----------------------------
+POST / HTTP/1.1
+Host: dynamodb.ap-southeast-2.amazonaws.com
+User-Agent: aws-sdk-go/1.12.30 (go1.8.1; darwin; amd64)
+Content-Length: 117
+Accept-Encoding: identity
+Authorization: AWS4-HMAC-SHA256 Credential=AKIAJDRVEI6FZVLYJ2XQ/20171128/ap-southeast-2/dynamodb/aws4_request, SignedHeaders=accept-encoding;content-length;content-type;host;x-amz-date;x-amz-target, Signature=ee2c5253127ed4d0712d71b3fa269d3d77664871494fa710bf487c0851ddf4a8
+Content-Type: application/x-amz-json-1.0
+X-Amz-Date: 20171128T034706Z
+X-Amz-Target: DynamoDB_20120810.GetItem
+
+{"Key":{"title":{"S":"The Big New Movie"},"year":{"N":"2015"}},"ReturnConsumedCapacity":"TOTAL","TableName":"Movies"}
+-----------------------------------------------------
+DEBUG: Response dynamodb/GetItem Details:
+---[ RESPONSE ]--------------------------------------
+HTTP/1.1 200 OK
+Content-Length: 199
+Connection: keep-alive
+Content-Type: application/x-amz-json-1.0
+Date: Tue, 28 Nov 2017 03:47:06 GMT
+Server: Server
+X-Amz-Crc32: 331066618
+X-Amzn-Requestid: A21H7EOEMAI42G4R4PN6HF7NTRVV4KQNSO5AEMVJF66Q9ASUAAJG
+
+
+-----------------------------------------------------
+{"ConsumedCapacity":{"CapacityUnits":0.5,"TableName":"Movies"},"Item":{"year":{"N":"2015"},"info":{"M":{"rating":{"N":"0"},"plot":{"S":"Nothing happens at all."}}},"title":{"S":"The Big New Movie"}}}
+
+
+*****************^^^^^^^^^*****************
+
+DEBUG: Request dynamodb/GetItem Details:
+---[ REQUEST POST-SIGN ]-----------------------------
+POST / HTTP/1.1
+Host: dynamodb.ap-southeast-2.amazonaws.com
+User-Agent: aws-sdk-go/1.12.30 (go1.8.1; darwin; amd64)
+Content-Length: 116
+Accept-Encoding: identity
+Authorization: AWS4-HMAC-SHA256 Credential=AKIAJDRVEI6FZVLYJ2XQ/20171128/ap-southeast-2/dynamodb/aws4_request, SignedHeaders=accept-encoding;content-length;content-type;host;x-amz-date;x-amz-target, Signature=05899b6d76e6076f710d70364e68a4f9001a922ed27139542b4591cbe68935cc
+Content-Type: application/x-amz-json-1.0
+X-Amz-Date: 20171128T034712Z
+X-Amz-Target: DynamoDB_20120810.GetItem
+
+{"Key":{"title":{"S":"The Big New Movi"},"year":{"N":"2015"}},"ReturnConsumedCapacity":"TOTAL","TableName":"Movies"}
+-----------------------------------------------------
+DEBUG: Response dynamodb/GetItem Details:
+---[ RESPONSE ]--------------------------------------
+HTTP/1.1 200 OK
+Content-Length: 63
+Connection: keep-alive
+Content-Type: application/x-amz-json-1.0
+Date: Tue, 28 Nov 2017 03:47:12 GMT
+Server: Server
+X-Amz-Crc32: 490932883
+X-Amzn-Requestid: F0HE9ODH8FRTQI55NJ1Q3KJKNVVV4KQNSO5AEMVJF66Q9ASUAAJG
+
+
+-----------------------------------------------------
+{"ConsumedCapacity":{"CapacityUnits":0.5,"TableName":"Movies"}}
+
+
+*****************^^^^^^^^^*****************
+
+DEBUG: Request dynamodb/GetItem Details:
+---[ REQUEST POST-SIGN ]-----------------------------
+POST / HTTP/1.1
+Host: dynamodb.ap-southeast-2.amazonaws.com
+User-Agent: aws-sdk-go/1.12.30 (go1.8.1; darwin; amd64)
+Content-Length: 117
+Accept-Encoding: identity
+Authorization: AWS4-HMAC-SHA256 Credential=AKIAJDRVEI6FZVLYJ2XQ/20171128/ap-southeast-2/dynamodb/aws4_request, SignedHeaders=accept-encoding;content-length;content-type;host;x-amz-date;x-amz-target, Signature=598428a406ccaab926c62de0e60b5774be5d9f661844d64feea84ab6902f58ca
+Content-Type: application/x-amz-json-1.0
+X-Amz-Date: 20171128T034733Z
+X-Amz-Target: DynamoDB_20120810.GetItem
+
+{"Key":{"title":{"S":"The Big New Movie"},"year":{"N":"2015"}},"ReturnConsumedCapacity":"TOTAL","TableName":"Movies"}
+-----------------------------------------------------
+DEBUG: Response dynamodb/GetItem Details:
+---[ RESPONSE ]--------------------------------------
+HTTP/1.1 200 OK
+Content-Length: 199
+Connection: keep-alive
+Content-Type: application/x-amz-json-1.0
+Date: Tue, 28 Nov 2017 03:47:33 GMT
+Server: Server
+X-Amz-Crc32: 331066618
+X-Amzn-Requestid: 7U1MOM49DKL2QH8JC1M9SM6257VV4KQNSO5AEMVJF66Q9ASUAAJG
+
+
+-----------------------------------------------------
+{"ConsumedCapacity":{"CapacityUnits":0.5,"TableName":"Movies"},"Item":{"year":{"N":"2015"},"info":{"M":{"rating":{"N":"0"},"plot":{"S":"Nothing happens at all."}}},"title":{"S":"The Big New Movie"}}}
+
+
+*****************^^^^^^^^^*****************
+
+DEBUG: Request dynamodb/GetItem Details:
+---[ REQUEST POST-SIGN ]-----------------------------
+POST / HTTP/1.1
+Host: dynamodb.ap-southeast-2.amazonaws.com
+User-Agent: aws-sdk-go/1.12.30 (go1.8.1; darwin; amd64)
+Content-Length: 117
+Accept-Encoding: identity
+Authorization: AWS4-HMAC-SHA256 Credential=AKIAJDRVEI6FZVLYJ2XQ/20171128/ap-southeast-2/dynamodb/aws4_request, SignedHeaders=accept-encoding;content-length;content-type;host;x-amz-date;x-amz-target, Signature=32732d4fa154f192ef3b44d8c565d35e882b421cd561df473b9f8d13d4f5ee59
+Content-Type: application/x-amz-json-1.0
+X-Amz-Date: 20171128T044927Z
+X-Amz-Target: DynamoDB_20120810.GetItem
+
+{"Key":{"title":{"S":"The Big New Movie"},"year":{"N":"2015"}},"ReturnConsumedCapacity":"TOTAL","TableName":"Movies"}
+-----------------------------------------------------
+DEBUG: Response dynamodb/GetItem Details:
+---[ RESPONSE ]--------------------------------------
+HTTP/1.1 200 OK
+Content-Length: 199
+Connection: keep-alive
+Content-Type: application/x-amz-json-1.0
+Date: Tue, 28 Nov 2017 04:49:27 GMT
+Server: Server
+X-Amz-Crc32: 331066618
+X-Amzn-Requestid: 32BA7LVN51D0VOS2R9CBU3Q9N3VV4KQNSO5AEMVJF66Q9ASUAAJG
+
+
+-----------------------------------------------------
+{"ConsumedCapacity":{"CapacityUnits":0.5,"TableName":"Movies"},"Item":{"year":{"N":"2015"},"info":{"M":{"rating":{"N":"0"},"plot":{"S":"Nothing happens at all."}}},"title":{"S":"The Big New Movie"}}}
+
+
+*****************^^^^^^^^^*****************
+
+
+
+*****************^^^putItem^^^^*****************
+
+
+
+*****************^^^putItem^^^^*****************
+
+
+
+*****************^^^putItem^^^^*****************
+
+
+
+*****************^^^putItem^^^^*****************
+
+DEBUG: Request dynamodb/PutItem Details:
+---[ REQUEST POST-SIGN ]-----------------------------
+POST / HTTP/1.1
+Host: dynamodb.ap-southeast-2.amazonaws.com
+User-Agent: aws-sdk-go/1.12.30 (go1.8.1; darwin; amd64)
+Content-Length: 212
+Accept-Encoding: identity
+Authorization: AWS4-HMAC-SHA256 Credential=AKIAJDRVEI6FZVLYJ2XQ/20171128/ap-southeast-2/dynamodb/aws4_request, SignedHeaders=accept-encoding;content-length;content-type;host;x-amz-date;x-amz-target, Signature=e68103505db2b3abf5caeaf6ca9d86dcea97e403b247985b8394b7cf4ee2e1e2
+Content-Type: application/x-amz-json-1.0
+X-Amz-Date: 20171128T051121Z
+X-Amz-Target: DynamoDB_20120810.PutItem
+
+{"Item":{"info":{"M":{"plot":{"S":"A rock band plays their music at high volumes, annoying the neighbors."},"rating":{"N":"6.2"}}},"title":{"S":"Turn It Down, Or Else!"},"year":{"N":"2013"}},"TableName":"Movies"}
+-----------------------------------------------------
+DEBUG: Response dynamodb/PutItem Details:
+---[ RESPONSE ]--------------------------------------
+HTTP/1.1 200 OK
+Content-Length: 2
+Connection: keep-alive
+Content-Type: application/x-amz-json-1.0
+Date: Tue, 28 Nov 2017 05:11:22 GMT
+Server: Server
+X-Amz-Crc32: 2745614147
+X-Amzn-Requestid: I185Q8GBOD903IAR3K4BJS7OUBVV4KQNSO5AEMVJF66Q9ASUAAJG
+
+
+-----------------------------------------------------
+{}
+DEBUG: Request dynamodb/PutItem Details:
+---[ REQUEST POST-SIGN ]-----------------------------
+POST / HTTP/1.1
+Host: dynamodb.ap-southeast-2.amazonaws.com
+User-Agent: aws-sdk-go/1.12.30 (go1.8.1; darwin; amd64)
+Content-Length: 158
+Accept-Encoding: identity
+Authorization: AWS4-HMAC-SHA256 Credential=AKIAJDRVEI6FZVLYJ2XQ/20171128/ap-southeast-2/dynamodb/aws4_request, SignedHeaders=accept-encoding;content-length;content-type;host;x-amz-date;x-amz-target, Signature=e87b4894588851f05c1b23183a44e3a076645d8098bfb8be72c03d9fde04cb7a
+Content-Type: application/x-amz-json-1.0
+X-Amz-Date: 20171128T051122Z
+X-Amz-Target: DynamoDB_20120810.PutItem
+
+{"Item":{"info":{"M":{"plot":{"S":"Nothing happens at all."},"rating":{"N":"0"}}},"title":{"S":"The Big New Movie"},"year":{"N":"2015"}},"TableName":"Movies"}
+-----------------------------------------------------
+DEBUG: Response dynamodb/PutItem Details:
+---[ RESPONSE ]--------------------------------------
+HTTP/1.1 200 OK
+Content-Length: 2
+Connection: keep-alive
+Content-Type: application/x-amz-json-1.0
+Date: Tue, 28 Nov 2017 05:11:22 GMT
+Server: Server
+X-Amz-Crc32: 2745614147
+X-Amzn-Requestid: IVLG72NPRC8C54JOPEMFOBHJ8JVV4KQNSO5AEMVJF66Q9ASUAAJG
+
+
+-----------------------------------------------------
+{}
+DEBUG: Request dynamodb/PutItem Details:
+---[ REQUEST POST-SIGN ]-----------------------------
+POST / HTTP/1.1
+Host: dynamodb.ap-southeast-2.amazonaws.com
+User-Agent: aws-sdk-go/1.12.30 (go1.8.1; darwin; amd64)
+Content-Length: 185
+Accept-Encoding: identity
+Authorization: AWS4-HMAC-SHA256 Credential=AKIAJDRVEI6FZVLYJ2XQ/20171128/ap-southeast-2/dynamodb/aws4_request, SignedHeaders=accept-encoding;content-length;content-type;host;x-amz-date;x-amz-target, Signature=c32bed6f409e8ad9098e05c30ec83c0094999de3a60fbeee8db8da90a225d3e8
+Content-Type: application/x-amz-json-1.0
+X-Amz-Date: 20171128T051122Z
+X-Amz-Target: DynamoDB_20120810.PutItem
+
+{"Item":{"info":{"M":{"plot":{"S":"A lawyer in a small town suports a black man"},"rating":{"N":"10"}}},"title":{"S":"To Kill a Mocking Bird"},"year":{"N":"2015"}},"TableName":"Movies"}
+-----------------------------------------------------
+DEBUG: Response dynamodb/PutItem Details:
+---[ RESPONSE ]--------------------------------------
+HTTP/1.1 200 OK
+Content-Length: 2
+Connection: keep-alive
+Content-Type: application/x-amz-json-1.0
+Date: Tue, 28 Nov 2017 05:11:22 GMT
+Server: Server
+X-Amz-Crc32: 2745614147
+X-Amzn-Requestid: S8APS01DE0ROF6QLU5F9RR5QM3VV4KQNSO5AEMVJF66Q9ASUAAJG
+
+
+-----------------------------------------------------
+{}
+DEBUG: Request dynamodb/PutItem Details:
+---[ REQUEST POST-SIGN ]-----------------------------
+POST / HTTP/1.1
+Host: dynamodb.ap-southeast-2.amazonaws.com
+User-Agent: aws-sdk-go/1.12.30 (go1.8.1; darwin; amd64)
+Content-Length: 145
+Accept-Encoding: identity
+Authorization: AWS4-HMAC-SHA256 Credential=AKIAJDRVEI6FZVLYJ2XQ/20171128/ap-southeast-2/dynamodb/aws4_request, SignedHeaders=accept-encoding;content-length;content-type;host;x-amz-date;x-amz-target, Signature=84a69803c49ae8a84067d924f12192be0d38f385b11c3c229d060d68723efd53
+Content-Type: application/x-amz-json-1.0
+X-Amz-Date: 20171128T051122Z
+X-Amz-Target: DynamoDB_20120810.PutItem
+
+{"Item":{"info":{"M":{"plot":{"S":"Destroy the world"},"rating":{"N":"1"}}},"title":{"S":"James Bond"},"year":{"N":"2015"}},"TableName":"Movies"}
+-----------------------------------------------------
+DEBUG: Response dynamodb/PutItem Details:
+---[ RESPONSE ]--------------------------------------
+HTTP/1.1 200 OK
+Content-Length: 2
+Connection: keep-alive
+Content-Type: application/x-amz-json-1.0
+Date: Tue, 28 Nov 2017 05:11:22 GMT
+Server: Server
+X-Amz-Crc32: 2745614147
+X-Amzn-Requestid: 6EK9IEJU1EDDT72RKK81KB4N1NVV4KQNSO5AEMVJF66Q9ASUAAJG
+
+
+-----------------------------------------------------
+{}
+DEBUG: Request dynamodb/PutItem Details:
+---[ REQUEST POST-SIGN ]-----------------------------
+POST / HTTP/1.1
+Host: dynamodb.ap-southeast-2.amazonaws.com
+User-Agent: aws-sdk-go/1.12.30 (go1.8.1; darwin; amd64)
+Content-Length: 164
+Accept-Encoding: identity
+Authorization: AWS4-HMAC-SHA256 Credential=AKIAJDRVEI6FZVLYJ2XQ/20171128/ap-southeast-2/dynamodb/aws4_request, SignedHeaders=accept-encoding;content-length;content-type;host;x-amz-date;x-amz-target, Signature=d90deedfaa288301aa27b258709cfd7321a78cf252e5c826589b2304dbf2b438
+Content-Type: application/x-amz-json-1.0
+X-Amz-Date: 20171128T051122Z
+X-Amz-Target: DynamoDB_20120810.PutItem
+
+{"Item":{"info":{"M":{"plot":{"S":"Documentary on the moon landing "},"rating":{"N":"5"}}},"title":{"S":"Apollo Landing"},"year":{"N":"2015"}},"TableName":"Movies"}
+-----------------------------------------------------
+DEBUG: Response dynamodb/PutItem Details:
+---[ RESPONSE ]--------------------------------------
+HTTP/1.1 200 OK
+Content-Length: 2
+Connection: keep-alive
+Content-Type: application/x-amz-json-1.0
+Date: Tue, 28 Nov 2017 05:11:22 GMT
+Server: Server
+X-Amz-Crc32: 2745614147
+X-Amzn-Requestid: UONUNHF94HJTOPMHB4SFKJLKHNVV4KQNSO5AEMVJF66Q9ASUAAJG
+
+
+-----------------------------------------------------
+{}
+DEBUG: Request dynamodb/PutItem Details:
+---[ REQUEST POST-SIGN ]-----------------------------
+POST / HTTP/1.1
+Host: dynamodb.ap-southeast-2.amazonaws.com
+User-Agent: aws-sdk-go/1.12.30 (go1.8.1; darwin; amd64)
+Content-Length: 173
+Accept-Encoding: identity
+Authorization: AWS4-HMAC-SHA256 Credential=AKIAJDRVEI6FZVLYJ2XQ/20171128/ap-southeast-2/dynamodb/aws4_request, SignedHeaders=accept-encoding;content-length;content-type;host;x-amz-date;x-amz-target, Signature=407e9de225036c4975206dfae29c8e5e8717db3563d038f6726284e5309c4018
+Content-Type: application/x-amz-json-1.0
+X-Amz-Date: 20171128T051122Z
+X-Amz-Target: DynamoDB_20120810.PutItem
+
+{"Item":{"info":{"M":{"plot":{"S":"school in poor London suburb in the 60s"},"rating":{"N":"8"}}},"title":{"S":"To Sir With Love"},"year":{"N":"2015"}},"TableName":"Movies"}
+-----------------------------------------------------
+DEBUG: Response dynamodb/PutItem Details:
+---[ RESPONSE ]--------------------------------------
+HTTP/1.1 200 OK
+Content-Length: 2
+Connection: keep-alive
+Content-Type: application/x-amz-json-1.0
+Date: Tue, 28 Nov 2017 05:11:22 GMT
+Server: Server
+X-Amz-Crc32: 2745614147
+X-Amzn-Requestid: FCKKQFDBSRIDD2OFSRDNR7MHPNVV4KQNSO5AEMVJF66Q9ASUAAJG
+
+
+-----------------------------------------------------
+{}
+
+
+*****************^^^^^^^^^*****************
+
+DEBUG: Request dynamodb/GetItem Details:
+---[ REQUEST POST-SIGN ]-----------------------------
+POST / HTTP/1.1
+Host: dynamodb.ap-southeast-2.amazonaws.com
+User-Agent: aws-sdk-go/1.12.30 (go1.8.1; darwin; amd64)
+Content-Length: 116
+Accept-Encoding: identity
+Authorization: AWS4-HMAC-SHA256 Credential=AKIAJDRVEI6FZVLYJ2XQ/20171128/ap-southeast-2/dynamodb/aws4_request, SignedHeaders=accept-encoding;content-length;content-type;host;x-amz-date;x-amz-target, Signature=833aae06f56b909c9ac4f3b46ba4bd7481ed4f735014742128dcec3d2079ede6
+Content-Type: application/x-amz-json-1.0
+X-Amz-Date: 20171128T051301Z
+X-Amz-Target: DynamoDB_20120810.GetItem
+
+{"Key":{"title":{"S":"To Sir With Love"},"year":{"N":"2015"}},"ReturnConsumedCapacity":"TOTAL","TableName":"Movies"}
+-----------------------------------------------------
+DEBUG: Response dynamodb/GetItem Details:
+---[ RESPONSE ]--------------------------------------
+HTTP/1.1 200 OK
+Content-Length: 214
+Connection: keep-alive
+Content-Type: application/x-amz-json-1.0
+Date: Tue, 28 Nov 2017 05:13:01 GMT
+Server: Server
+X-Amz-Crc32: 193438799
+X-Amzn-Requestid: RUD11VEAIFII6JKIB5L5RHDG1JVV4KQNSO5AEMVJF66Q9ASUAAJG
+
+
+-----------------------------------------------------
+{"ConsumedCapacity":{"CapacityUnits":0.5,"TableName":"Movies"},"Item":{"year":{"N":"2015"},"info":{"M":{"rating":{"N":"8"},"plot":{"S":"school in poor London suburb in the 60s"}}},"title":{"S":"To Sir With Love"}}}
+
+
+*****************^^^^^^^^^*****************
+
+DEBUG: Request dynamodb/Query Details:
+---[ REQUEST POST-SIGN ]-----------------------------
+POST / HTTP/1.1
+Host: dynamodb.ap-southeast-2.amazonaws.com
+User-Agent: aws-sdk-go/1.12.30 (go1.8.1; darwin; amd64)
+Content-Length: 201
+Accept-Encoding: identity
+Authorization: AWS4-HMAC-SHA256 Credential=AKIAJDRVEI6FZVLYJ2XQ/20171128/ap-southeast-2/dynamodb/aws4_request, SignedHeaders=accept-encoding;content-length;content-type;host;x-amz-date;x-amz-target, Signature=cadf68e0f53599b58eb5af8caf7083c73d3768d569c763c89b693440b6e0a87c
+Content-Type: application/x-amz-json-1.0
+X-Amz-Date: 20171128T062743Z
+X-Amz-Target: DynamoDB_20120810.Query
+
+{"ConsistentRead":true,"ExpressionAttributeNames":{"#0":"year"},"ExpressionAttributeValues":{":0":{"S":"2015"}},"KeyConditionExpression":"#0 = :0","ReturnConsumedCapacity":"TOTAL","TableName":"Movies"}
+-----------------------------------------------------
+DEBUG: Response dynamodb/Query Details:
+---[ RESPONSE ]--------------------------------------
+HTTP/1.1 400 Bad Request
+Content-Length: 165
+Connection: keep-alive
+Content-Type: application/x-amz-json-1.0
+Date: Tue, 28 Nov 2017 06:27:43 GMT
+Server: Server
+X-Amz-Crc32: 1880536678
+X-Amzn-Requestid: SF4IAGSKQNEJGI6LBUIEF7UUN7VV4KQNSO5AEMVJF66Q9ASUAAJG
+
+
+-----------------------------------------------------
+{"__type":"com.amazon.coral.validate#ValidationException","message":"One or more parameter values were invalid: Condition parameter type does not match schema type"}
+
+
+*****************^^^query^^^^*****************
+
+DEBUG: Request dynamodb/Query Details:
+---[ REQUEST POST-SIGN ]-----------------------------
+POST / HTTP/1.1
+Host: dynamodb.ap-southeast-2.amazonaws.com
+User-Agent: aws-sdk-go/1.12.30 (go1.8.1; darwin; amd64)
+Content-Length: 179
+Accept-Encoding: identity
+Authorization: AWS4-HMAC-SHA256 Credential=AKIAJDRVEI6FZVLYJ2XQ/20171128/ap-southeast-2/dynamodb/aws4_request, SignedHeaders=accept-encoding;content-length;content-type;host;x-amz-date;x-amz-target, Signature=f3dc049c82a57a706a4670dc04b365d96eb2623de0783757e1a2fec7df24b4b8
+Content-Type: application/x-amz-json-1.0
+X-Amz-Date: 20171128T065556Z
+X-Amz-Target: DynamoDB_20120810.Query
+
+{"ExpressionAttributeNames":{"#0":"year"},"ExpressionAttributeValues":{":0":{"S":"2015"}},"KeyConditionExpression":"#0 = :0","ReturnConsumedCapacity":"TOTAL","TableName":"Movies"}
+-----------------------------------------------------
+DEBUG: Response dynamodb/Query Details:
+---[ RESPONSE ]--------------------------------------
+HTTP/1.1 400 Bad Request
+Content-Length: 165
+Connection: keep-alive
+Content-Type: application/x-amz-json-1.0
+Date: Tue, 28 Nov 2017 06:55:57 GMT
+Server: Server
+X-Amz-Crc32: 1880536678
+X-Amzn-Requestid: LLTLC5FGGUIN5NB8HCRU9KR5S3VV4KQNSO5AEMVJF66Q9ASUAAJG
+
+
+-----------------------------------------------------
+{"__type":"com.amazon.coral.validate#ValidationException","message":"One or more parameter values were invalid: Condition parameter type does not match schema type"}
+
+
+*****************^^^query^^^^*****************
+
+DEBUG: Request dynamodb/Query Details:
+---[ REQUEST POST-SIGN ]-----------------------------
+POST / HTTP/1.1
+Host: dynamodb.ap-southeast-2.amazonaws.com
+User-Agent: aws-sdk-go/1.12.30 (go1.8.1; darwin; amd64)
+Content-Length: 179
+Accept-Encoding: identity
+Authorization: AWS4-HMAC-SHA256 Credential=AKIAJDRVEI6FZVLYJ2XQ/20171128/ap-southeast-2/dynamodb/aws4_request, SignedHeaders=accept-encoding;content-length;content-type;host;x-amz-date;x-amz-target, Signature=3bb61f7b1e98261adae752943abf257af874bee2aa86f6a35d6e15d7ef88120c
+Content-Type: application/x-amz-json-1.0
+X-Amz-Date: 20171128T070033Z
+X-Amz-Target: DynamoDB_20120810.Query
+
+{"ExpressionAttributeNames":{"#0":"year"},"ExpressionAttributeValues":{":0":{"S":"2015"}},"KeyConditionExpression":"#0 = :0","ReturnConsumedCapacity":"TOTAL","TableName":"Movies"}
+-----------------------------------------------------
+DEBUG: Response dynamodb/Query Details:
+---[ RESPONSE ]--------------------------------------
+HTTP/1.1 400 Bad Request
+Content-Length: 165
+Connection: keep-alive
+Content-Type: application/x-amz-json-1.0
+Date: Tue, 28 Nov 2017 07:00:33 GMT
+Server: Server
+X-Amz-Crc32: 1880536678
+X-Amzn-Requestid: 69469MD5J9A4BNHP98VUGS0F6JVV4KQNSO5AEMVJF66Q9ASUAAJG
+
+
+-----------------------------------------------------
+{"__type":"com.amazon.coral.validate#ValidationException","message":"One or more parameter values were invalid: Condition parameter type does not match schema type"}
+
+
+*****************^^^query^^^^*****************
+
+DEBUG: Request dynamodb/Query Details:
+---[ REQUEST POST-SIGN ]-----------------------------
+POST / HTTP/1.1
+Host: dynamodb.ap-southeast-2.amazonaws.com
+User-Agent: aws-sdk-go/1.12.30 (go1.8.1; darwin; amd64)
+Content-Length: 179
+Accept-Encoding: identity
+Authorization: AWS4-HMAC-SHA256 Credential=AKIAJDRVEI6FZVLYJ2XQ/20171128/ap-southeast-2/dynamodb/aws4_request, SignedHeaders=accept-encoding;content-length;content-type;host;x-amz-date;x-amz-target, Signature=9175de955b484e16d14f97ed86a52a0745caf5ca1ab63921a4cc0e62a26c3fa9
+Content-Type: application/x-amz-json-1.0
+X-Amz-Date: 20171128T072646Z
+X-Amz-Target: DynamoDB_20120810.Query
+
+{"ExpressionAttributeNames":{"#0":"year"},"ExpressionAttributeValues":{":0":{"N":"2015"}},"KeyConditionExpression":"#0 = :0","ReturnConsumedCapacity":"TOTAL","TableName":"Movies"}
+-----------------------------------------------------
+DEBUG: Response dynamodb/Query Details:
+---[ RESPONSE ]--------------------------------------
+HTTP/1.1 200 OK
+Content-Length: 780
+Connection: keep-alive
+Content-Type: application/x-amz-json-1.0
+Date: Tue, 28 Nov 2017 07:26:46 GMT
+Server: Server
+X-Amz-Crc32: 1361982432
+X-Amzn-Requestid: 879P3RKLKG7JCVUIEPTQTL24K3VV4KQNSO5AEMVJF66Q9ASUAAJG
+
+
+-----------------------------------------------------
+{"ConsumedCapacity":{"CapacityUnits":0.5,"TableName":"Movies"},"Count":5,"Items":[{"year":{"N":"2015"},"info":{"M":{"rating":{"N":"5"},"plot":{"S":"Documentary on the moon landing "}}},"title":{"S":"Apollo Landing"}},{"year":{"N":"2015"},"info":{"M":{"rating":{"N":"1"},"plot":{"S":"Destroy the world"}}},"title":{"S":"James Bond"}},{"year":{"N":"2015"},"info":{"M":{"rating":{"N":"0"},"plot":{"S":"Nothing happens at all."}}},"title":{"S":"The Big New Movie"}},{"year":{"N":"2015"},"info":{"M":{"rating":{"N":"10"},"plot":{"S":"A lawyer in a small town suports a black man"}}},"title":{"S":"To Kill a Mocking Bird"}},{"year":{"N":"2015"},"info":{"M":{"rating":{"N":"8"},"plot":{"S":"school in poor London suburb in the 60s"}}},"title":{"S":"To Sir With Love"}}],"ScannedCount":5}
+
+
+*****************^^^query^^^^*****************
+
+DEBUG: Request dynamodb/Query Details:
+---[ REQUEST POST-SIGN ]-----------------------------
+POST / HTTP/1.1
+Host: dynamodb.ap-southeast-2.amazonaws.com
+User-Agent: aws-sdk-go/1.12.30 (go1.8.1; darwin; amd64)
+Content-Length: 208
+Accept-Encoding: identity
+Authorization: AWS4-HMAC-SHA256 Credential=AKIAJDRVEI6FZVLYJ2XQ/20171128/ap-southeast-2/dynamodb/aws4_request, SignedHeaders=accept-encoding;content-length;content-type;host;x-amz-date;x-amz-target, Signature=ee43149638b9b58e331d898f405240a4e21a6a32bdb2c68fbc27039523c113f6
+Content-Type: application/x-amz-json-1.0
+X-Amz-Date: 20171128T081055Z
+X-Amz-Target: DynamoDB_20120810.Query
+
+{"ExpressionAttributeNames":{"#0":"Rating","#1":"year"},"ExpressionAttributeValues":{":0":{"N":"5"},":1":{"N":"2015"}},"KeyConditionExpression":"#1 = :1","ReturnConsumedCapacity":"TOTAL","TableName":"Movies"}
+-----------------------------------------------------
+DEBUG: Response dynamodb/Query Details:
+---[ RESPONSE ]--------------------------------------
+HTTP/1.1 400 Bad Request
+Content-Length: 147
+Connection: keep-alive
+Content-Type: application/x-amz-json-1.0
+Date: Tue, 28 Nov 2017 08:10:56 GMT
+Server: Server
+X-Amz-Crc32: 2400981490
+X-Amzn-Requestid: ABIH7PLPPMO5F89I8FULK8VBUNVV4KQNSO5AEMVJF66Q9ASUAAJG
+
+
+-----------------------------------------------------
+{"__type":"com.amazon.coral.validate#ValidationException","message":"Value provided in ExpressionAttributeNames unused in expressions: keys: {#0}"}
+
+
+*****************^^^query^^^^*****************
+
+DEBUG: Request dynamodb/Query Details:
+---[ REQUEST POST-SIGN ]-----------------------------
+POST / HTTP/1.1
+Host: dynamodb.ap-southeast-2.amazonaws.com
+User-Agent: aws-sdk-go/1.12.30 (go1.8.1; darwin; amd64)
+Content-Length: 238
+Accept-Encoding: identity
+Authorization: AWS4-HMAC-SHA256 Credential=AKIAJDRVEI6FZVLYJ2XQ/20171128/ap-southeast-2/dynamodb/aws4_request, SignedHeaders=accept-encoding;content-length;content-type;host;x-amz-date;x-amz-target, Signature=b31bf8e2f20f7cec3bfc024ee202835ebbdfa65efacebc91860c595a1f039ba7
+Content-Type: application/x-amz-json-1.0
+X-Amz-Date: 20171128T081402Z
+X-Amz-Target: DynamoDB_20120810.Query
+
+{"ExpressionAttributeNames":{"#0":"Rating","#1":"year"},"ExpressionAttributeValues":{":0":{"N":"5"},":1":{"N":"2015"}},"FilterExpression":"#0 <= :0","KeyConditionExpression":"#1 = :1","ReturnConsumedCapacity":"TOTAL","TableName":"Movies"}
+-----------------------------------------------------
+DEBUG: Response dynamodb/Query Details:
+---[ RESPONSE ]--------------------------------------
+HTTP/1.1 200 OK
+Content-Length: 101
+Connection: keep-alive
+Content-Type: application/x-amz-json-1.0
+Date: Tue, 28 Nov 2017 08:14:02 GMT
+Server: Server
+X-Amz-Crc32: 2344461191
+X-Amzn-Requestid: HO0M22V14OF7NOA9ASNDHE5G9VVV4KQNSO5AEMVJF66Q9ASUAAJG
+
+
+-----------------------------------------------------
+{"ConsumedCapacity":{"CapacityUnits":0.5,"TableName":"Movies"},"Count":0,"Items":[],"ScannedCount":5}
+
+
+*****************^^^query^^^^*****************
+
+DEBUG: Request dynamodb/Query Details:
+---[ REQUEST POST-SIGN ]-----------------------------
+POST / HTTP/1.1
+Host: dynamodb.ap-southeast-2.amazonaws.com
+User-Agent: aws-sdk-go/1.12.30 (go1.8.1; darwin; amd64)
+Content-Length: 253
+Accept-Encoding: identity
+Authorization: AWS4-HMAC-SHA256 Credential=AKIAJDRVEI6FZVLYJ2XQ/20171128/ap-southeast-2/dynamodb/aws4_request, SignedHeaders=accept-encoding;content-length;content-type;host;x-amz-date;x-amz-target, Signature=5c943a23510b53f0dc26ce6c82bc9595d0000b397522c0590529b3be5e6fd068
+Content-Type: application/x-amz-json-1.0
+X-Amz-Date: 20171128T081554Z
+X-Amz-Target: DynamoDB_20120810.Query
+
+{"ExpressionAttributeNames":{"#0":"info","#1":"rating","#2":"year"},"ExpressionAttributeValues":{":0":{"N":"5"},":1":{"N":"2015"}},"FilterExpression":"#0.#1 <= :0","KeyConditionExpression":"#2 = :1","ReturnConsumedCapacity":"TOTAL","TableName":"Movies"}
+-----------------------------------------------------
+DEBUG: Response dynamodb/Query Details:
+---[ RESPONSE ]--------------------------------------
+HTTP/1.1 200 OK
+Content-Length: 480
+Connection: keep-alive
+Content-Type: application/x-amz-json-1.0
+Date: Tue, 28 Nov 2017 08:15:55 GMT
+Server: Server
+X-Amz-Crc32: 3834776050
+X-Amzn-Requestid: I24ASSSUFKBPAQ90PFVSKTJIFFVV4KQNSO5AEMVJF66Q9ASUAAJG
+
+
+-----------------------------------------------------
+{"ConsumedCapacity":{"CapacityUnits":0.5,"TableName":"Movies"},"Count":3,"Items":[{"year":{"N":"2015"},"info":{"M":{"rating":{"N":"5"},"plot":{"S":"Documentary on the moon landing "}}},"title":{"S":"Apollo Landing"}},{"year":{"N":"2015"},"info":{"M":{"rating":{"N":"1"},"plot":{"S":"Destroy the world"}}},"title":{"S":"James Bond"}},{"year":{"N":"2015"},"info":{"M":{"rating":{"N":"0"},"plot":{"S":"Nothing happens at all."}}},"title":{"S":"The Big New Movie"}}],"ScannedCount":5}
+
+
+*****************^^^query^^^^*****************
+
+DEBUG: Request dynamodb/Query Details:
+---[ REQUEST POST-SIGN ]-----------------------------
+POST / HTTP/1.1
+Host: dynamodb.ap-southeast-2.amazonaws.com
+User-Agent: aws-sdk-go/1.12.30 (go1.8.1; darwin; amd64)
+Content-Length: 310
+Accept-Encoding: identity
+Authorization: AWS4-HMAC-SHA256 Credential=AKIAJDRVEI6FZVLYJ2XQ/20171128/ap-southeast-2/dynamodb/aws4_request, SignedHeaders=accept-encoding;content-length;content-type;host;x-amz-date;x-amz-target, Signature=fce0e87188eedcb332eba61d1baa29721d4ac211e747c0ae9d7637e7285b97c4
+Content-Type: application/x-amz-json-1.0
+X-Amz-Date: 20171128T082601Z
+X-Amz-Target: DynamoDB_20120810.Query
+
+{"ExpressionAttributeNames":{"#0":"info","#1":"rating","#2":"year","#3":"title"},"ExpressionAttributeValues":{":0":{"N":"5"},":1":{"N":"2015"},":2":{"S":"T"}},"FilterExpression":"#0.#1 <= :0","KeyConditionExpression":"(#2 = :1) AND (begins_with (#3, :2))","ReturnConsumedCapacity":"TOTAL","TableName":"Movies"}
+-----------------------------------------------------
+DEBUG: Response dynamodb/Query Details:
+---[ RESPONSE ]--------------------------------------
+HTTP/1.1 200 OK
+Content-Length: 229
+Connection: keep-alive
+Content-Type: application/x-amz-json-1.0
+Date: Tue, 28 Nov 2017 08:26:02 GMT
+Server: Server
+X-Amz-Crc32: 3523742234
+X-Amzn-Requestid: N4EP9QR6RI8R69S8KV5AEOBVDFVV4KQNSO5AEMVJF66Q9ASUAAJG
+
+
+-----------------------------------------------------
+{"ConsumedCapacity":{"CapacityUnits":0.5,"TableName":"Movies"},"Count":1,"Items":[{"year":{"N":"2015"},"info":{"M":{"rating":{"N":"0"},"plot":{"S":"Nothing happens at all."}}},"title":{"S":"The Big New Movie"}}],"ScannedCount":3}
+
+
+*****************^^^query^^^^*****************
+
+DEBUG: Request dynamodb/Query Details:
+---[ REQUEST POST-SIGN ]-----------------------------
+POST / HTTP/1.1
+Host: dynamodb.ap-southeast-2.amazonaws.com
+User-Agent: aws-sdk-go/1.12.30 (go1.8.1; darwin; amd64)
+Content-Length: 310
+Accept-Encoding: identity
+Authorization: AWS4-HMAC-SHA256 Credential=AKIAJDRVEI6FZVLYJ2XQ/20171128/ap-southeast-2/dynamodb/aws4_request, SignedHeaders=accept-encoding;content-length;content-type;host;x-amz-date;x-amz-target, Signature=24c76738f9a2a3f1c2025c0c678e079a735fa003585d7aab5afff174b3d67272
+Content-Type: application/x-amz-json-1.0
+X-Amz-Date: 20171128T082934Z
+X-Amz-Target: DynamoDB_20120810.Query
+
+{"ExpressionAttributeNames":{"#0":"info","#1":"rating","#2":"year","#3":"title"},"ExpressionAttributeValues":{":0":{"N":"5"},":1":{"N":"2015"},":2":{"S":"T"}},"FilterExpression":"#0.#1 <= :0","KeyConditionExpression":"(#2 = :1) AND (begins_with (#3, :2))","ReturnConsumedCapacity":"TOTAL","TableName":"Movies"}
+-----------------------------------------------------
+DEBUG: Response dynamodb/Query Details:
+---[ RESPONSE ]--------------------------------------
+HTTP/1.1 200 OK
+Content-Length: 229
+Connection: keep-alive
+Content-Type: application/x-amz-json-1.0
+Date: Tue, 28 Nov 2017 08:29:35 GMT
+Server: Server
+X-Amz-Crc32: 3523742234
+X-Amzn-Requestid: DGQA67E45V0J9F59SH3DAEQN0VVV4KQNSO5AEMVJF66Q9ASUAAJG
+
+
+-----------------------------------------------------
+{"ConsumedCapacity":{"CapacityUnits":0.5,"TableName":"Movies"},"Count":1,"Items":[{"year":{"N":"2015"},"info":{"M":{"rating":{"N":"0"},"plot":{"S":"Nothing happens at all."}}},"title":{"S":"The Big New Movie"}}],"ScannedCount":3}

@@ -1,0 +1,40 @@
+package main
+
+import (
+       "fmt"
+       )
+
+type xx struct {flag int}
+
+func main () {
+    x:=any_(1) ;                     printany_(x) 
+    x=any_(true) ;                   printany_(x)
+    x=any_(float32(23.912910)) ;     printany_(x) 
+    x=any_(xx{21}) ;                 printany_(x)
+}
+
+
+func printany_ (x interface{} ) {
+           switch x := x.(type) {
+            case int:   fmt.Printf("int: %d\n",x) 
+            case bool:  fmt.Printf("bool: %v\n",x)
+            case float32:  fmt.Printf("float: %8.4f\n",x)
+            case xx:    fmt.Printf("struct: %#v\n",x)
+           }
+}
+
+
+
+
+func  any_ (arg1 interface{} ) interface{}  {
+           switch v:=arg1.(type) {
+            case int:   fmt.Printf("int: %d\n",v) 
+            case bool:  fmt.Printf("bool: %v\n",v)
+            case float32:  fmt.Printf("float: %.2f\n",v)
+            case xx:    fmt.Printf("struct: %#v\n",v)
+           }
+           return arg1
+}
+           
+           
+

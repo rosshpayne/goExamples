@@ -1,0 +1,63 @@
+package main
+
+import (
+       "io"
+       "os"
+       "fmt"
+       "strings"
+       )
+type response struct {
+          Body  io.ReadCloser			// interface :  concrete  type has only to satisfy this  interface.
+                }
+func main () {
+             var r1 response
+             var buf = make([]byte,20) 
+             rd := strings.NewReader("first reader ")
+             fc,err := os.Open("/Users/rosspayne/go/src/gopl.io/myinterface/test.out")
+             if err != nil { panic(err) }
+             //
+             //  Body is an interface value.  In the response struct its type is io.ReadCloser which is an interface.
+             //  This means that Body must support the following methods
+             //
+             //              Read(p [] byte) (n int, err error)
+             //              Close() (err error) 
+             //
+             //  Using composition by struct embedding we can add support for io.ReadCloser.
+             //  Here we define a struct with two anonymous interface fields of non-primitive types - interfaces.
+             //  The struct has all the methods supported by the interfaces promoted from its field values.
+             //  Once the struct is assigned values, rd,fc, the Struct assigned to Body has access
+             //  to the Read & Close methods in rd, rc.
+             //
+	     r1.Body = struct {				// assign Body a concrete type (of type struct) that satisfies the ReadCloser interface
+  		io.Reader
+                io.Closer
+  		}{
+  		rd,              // only supports io.Reader
+                fc,              // supports io.Reader & io.Closer
+  		}
+             //
+             n,err:=r1.Body.Read(buf)
+             if err != nil { panic(err) }
+             //             
+             fmt.Println("%d  %s",n,string(buf))
+             // fmt.Println("%d  %s",n,r1.Body.Name())      // r1.Body.Name undefined (type io.ReadCloser has no field or method Name)
+             err = r1.Body.Close() 
+             if err != nil { panic(err)  }
+             fmt.Println("File closed..") 
+             //
+             // type assertion
+             //
+             v := r1.Body.(io.Writer)
+             n,err=v.Write([]byte{'a','s','d'});
+             //  v := r1.Body.(*os.File)
+               //fmt.Println(v.WriteTo(os.Stdout))
+               //v.Close()
+
+	     r2.Body = struct {                         // this will not work as struct type does no methods that satisfy the ReadCloser interface.	
+                x io.Reader				//   each of its members (fields) satisfy  the interface but do no promote the methods.
+                y io.Closer
+                }{
+                rd,              // only supports io.Reader
+                fc,              // supports io.Reader & io.Closer
+                }
+}

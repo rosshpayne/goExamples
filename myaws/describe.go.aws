@@ -1,0 +1,44 @@
+package main
+
+import (
+ 	"fmt"
+	"log"
+	"os"
+
+	"github.com/aws/aws-sdk-go/aws"
+	"github.com/aws/aws-sdk-go/aws/session"
+	"github.com/aws/aws-sdk-go/aws/credentials"
+	_ "github.com/aws/aws-sdk-go/service/dynamodb/dynamodbattribute"
+	"github.com/aws/aws-sdk-go/service/dynamodb"
+	)
+
+func main () {
+
+	//tabname_:= os.Args[1]
+
+	sess, err := session.NewSession(&aws.Config{
+	Region: aws.String("ap-southeast-2"),
+	Credentials: credentials.NewSharedCredentials("", "rossp4"),
+	})
+    	if err != nil {
+        	fmt.Println("Error creating session:")
+		log.Panic(err)
+    	}
+    	// Create DynamoDB client
+    	svc := dynamodb.New(sess)
+
+	tablenameinput:= &dynamodb.DescribeTableInput{}
+
+
+	for _,tab := range os.Args[1:] {
+        	output_,err := svc.DescribeTable( tablenameinput.SetTableName(tab))
+		if err != nil {
+			log.Panic(err)
+		}
+
+		fmt.Println(output_.GoString())
+//		fmt.Println(output_.String())
+//		fmt.Println(output_)
+	}
+
+}

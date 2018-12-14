@@ -1,0 +1,56 @@
+package main
+
+import (
+	"fmt"
+	"os"
+	"time"
+)
+
+func main() {
+
+	var c = make(chan struct{})
+	var abort = make(chan int)
+
+	go func() {
+		for {
+			select {
+			case <-abort:
+				fmt.Println("abort sleep generator..")
+				return
+			default:
+				time.Sleep(12 * time.Second)
+				select // non-blocking abort check.
+				{
+				case <-abort:
+					fmt.Println("abort sleep generator..")
+					return
+				default:
+				}
+				c <- struct{}{}
+			}
+		} // end for
+	}()
+
+	go func() { os.Stdin.Read(make([]byte, 1)); close(abort) }()
+
+	defer func() { fmt.Println("Defered execution..") }()
+
+loop:    
+	for {
+		select {
+		case m := <-c:
+			fmt.Printf("%v channel c received something\n", m)
+		case t := <-time.After(5 * time.Second): // checks if channel exists otherwise makes & returns a channel then runs in gorountine sending time to channel at each interval
+			fmt.Println("timed out at: %v", t)
+			// break;      // only jumped out of select stmt.
+			break loop // break out of for loop
+			// return      // exits program
+		case <-abort:
+			fmt.Printf("main existing..")
+			time.Sleep(14 * time.Second)
+			return
+		}
+	}
+	fmt.Println("end of for..")
+
+}

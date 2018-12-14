@@ -1,0 +1,37 @@
+package main
+
+import (
+	"fmt"
+	"log"
+	"os"
+)
+
+func main() {
+	fmt.Printf("0xFFFF %016b %[1]d\n",0xFFFF)
+	fi, err := os.Lstat("/Users/rosspayne/go/src/gopl.io/ch9/memo3")
+	if err != nil {
+		log.Fatal(err)
+	}
+	ModeType := os.ModeDir | os.ModeSymlink | os.ModeNamedPipe | os.ModeSocket | os.ModeDevice
+        fmt.Printf("ModeDir:        %032b\n", os.ModeDir)
+        fmt.Printf("ModeAppend:     %032b\n", os.ModeAppend)
+        fmt.Printf("ModeExclusive:  %032b\n", os.ModeExclusive)
+        fmt.Printf("ModeCharDevice: %032b\n", os.ModeCharDevice)
+        fmt.Printf("ModeSymlink:    %032b\n", os.ModeSymlink)
+        fmt.Printf("ModeSticky:     %032b\n", os.ModeSticky)
+        fmt.Println("os.ModeDir | os.ModeSymlink | os.ModeNamedPipe | os.ModeSocket | os.ModeDevice: " )
+        fmt.Printf("ModeType:       %032b\n", ModeType)
+
+        fmt.Printf("\nFile mode:     %032b\n", fi.Mode())
+
+	switch mode := fi.Mode(); {
+	case mode.IsRegular():
+		fmt.Println("regular file")
+	case mode.IsDir():
+		fmt.Println("directory")
+	case mode&os.ModeSymlink != 0:
+		fmt.Println("symbolic link")
+	case mode&os.ModeNamedPipe != 0:
+		fmt.Println("named pipe")
+	}
+}

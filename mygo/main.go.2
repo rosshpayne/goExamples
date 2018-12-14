@@ -1,0 +1,98 @@
+package main
+
+import (
+       "fmt"
+       )
+
+// pc[i] is the population count of i.
+var pc [256]byte
+
+type pretend struct{ name      string
+                    address   []string
+                    age       int
+                    } 
+//type ppretend  *pretend
+
+type ppretend  *struct{ name      string
+                    address   []string
+                    age       int
+                    }
+
+type Point struct{x,y int}
+
+var pp3 = []*struct{ name      string
+                    address   []string
+                    age       int
+                    }{
+                      {name: "Ian",
+                       address: []string{"55 Burkitt St","Page",},    // example of composit literal T{...}
+                       age: 59,},
+                     }
+
+func init() {
+        //mypre := new(pretend);
+        pp := new(Point)
+        *pp = Point{1,2};
+        pp1 := &Point{3,4}       // exmaple of composite literal:  Note that, unlike in C, it's perfectly OK to return the address of a local variable; the storage associated with the variable survives after the function returns. In fact, taking the address of a composite literal allocates a fresh instance each time it is evaluated
+      
+        fmt.Printf("%T\n",*pp)
+        fmt.Printf("%T\n",pp)
+        fmt.Printf("%#v\n",*pp)
+        fmt.Printf("%#v\n",*pp1)
+        mypre := &pretend{name: "Ross", 
+                         address: []string{"55 Burkitt St","Page",},
+                         age: 59,}
+        //myppre := mypre
+        myppre := &pretend{name: "Paul",
+                         address: []string{"55 Burkitt St","Page",},
+                         age: 59,}
+        fmt.Printf("%T\n",mypre)
+        fmt.Printf("%#v\n",mypre)
+        fmt.Printf("%T\n",myppre)
+        fmt.Printf("%#v\n",myppre)
+        fmt.Printf("pp3  %#v\n",pp3)
+
+
+/*        lin := uint64(0x1234567890ABCDEF)
+        fmt.Printf("large int %d %b\n",lin, lin);
+        fmt.Printf("%T\n",lin)
+        fmt.Printf("%b\n",1<<0);
+        fmt.Printf("%b\n",1<<1);
+        fmt.Printf("%b\n",1<<2);
+        fmt.Printf("%b\n",1<<8);
+        fmt.Printf("2 %b\n",2);
+        fmt.Printf("7 %b\n",7);
+        fmt.Printf("2&7  %b\n",2&7);
+        fmt.Println("-------------");
+        fmt.Printf("%b\n",4>>0);
+        fmt.Printf("%b\n",4>>1);
+        fmt.Printf("%b\n",4>>(2*8));
+        fmt.Printf("%b\n",4>>(3*8)); */
+	for i := range pc {
+		pc[i] = pc[i/2] + byte(i&1)
+ //               fmt.Printf("%d %b, %b %b %d\n",i,i,byte(i&1),pc[i],pc[i])
+                //fmt.Printf("%d %v %b \n",i,pc[i],pc[i])
+	}
+}
+
+// PopCount returns the population count (number of set bits) of x.
+func main () {
+      //init_();
+      a:=PopCount(4);
+      fmt.Printf("%d %b",a,a);
+}
+
+
+func PopCount(x uint64) int {
+	return int(pc[byte(x>>(0*8))] +
+		pc[byte(x>>(1*8))] +
+		pc[byte(x>>(2*8))] +
+		pc[byte(x>>(3*8))] +
+		pc[byte(x>>(4*8))] +
+		pc[byte(x>>(5*8))] +
+		pc[byte(x>>(6*8))] +
+		pc[byte(x>>(7*8))])
+}    
+
+
+

@@ -1,0 +1,22 @@
+package main
+
+import (
+        "fmt"
+       )
+
+type Flags uint
+
+const ( FlagsUp  Flags  = 1 << iota
+        FlagsBroadcast
+        FlagsLoopBack
+        FlagsPointtoPoint
+        FlagsMulticast
+     )
+
+func main () {
+     fmt.Printf("%d  %b\n", FlagsUp, FlagsUp)
+     fmt.Printf("%d  %b\n", FlagsBroadcast, FlagsBroadcast)
+     fmt.Printf("%d  %b\n", FlagsLoopBack, FlagsLoopBack)
+     fmt.Printf("%d  %b\n", FlagsPointtoPoint, FlagsPointtoPoint)
+     fmt.Printf("%d  %b\n", FlagsMulticast, FlagsMulticast)
+}

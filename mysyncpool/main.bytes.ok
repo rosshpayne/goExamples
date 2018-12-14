@@ -1,0 +1,63 @@
+package main
+
+import (
+	"bytes"
+	"fmt"
+	"io"
+	"os"
+	"sync"
+	"time"
+)
+
+var p func() interface{} = func() interface{} { return new(bytes.Buffer) }
+
+//var p = func() interface{} { return new(bytes.Buffer) }                              // function literal
+
+// The Pool's New function should generally only return pointer
+// types, since a pointer can be put into the return interface
+// value without an allocation:
+
+//var bufPool = sync.Pool{ New: func() interface{} { return new(bytes.Buffer) }, }   // struct literal using field names hence add , at end.
+var bufPool = sync.Pool{New: p} // pool contains *bytes.Buffer elements
+
+// timeNow is a fake version of time.Now for tests.
+func timeNow() time.Time {
+	return time.Unix(1136214245, 0)
+}
+
+func Log(w io.Writer, key, val string) {
+	b := bufPool.Get().(*bytes.Buffer)
+	b.Reset()
+	// Replace this with time.Now() in a real logger.
+	b.WriteString(timeNow().UTC().Format(time.RFC3339))
+	b.WriteByte(' ')
+	b.WriteString(key)
+	b.WriteByte('=')
+	b.WriteString(val)
+	w.Write(b.Bytes())
+	bufPool.Put(b)
+	b.Reset()
+	b.WriteString(time.Now().String())
+	b.WriteByte(' ')
+	b.WriteString(key + "AA")
+	b.WriteByte('=')
+	b.WriteString(val + "CC")
+	bufPool.Put(b)
+	bufPool.Put(b)
+	bufPool.Put(b)
+}
+
+func main() {
+	Log(os.Stdout, "path", "/search?q=flowers")
+	buf, _ := bufPool.Get().(*bytes.Buffer)     // Get() returns interface{}, so must use Type Assertion to reveal value.
+	fmt.Printf("\n%s\n", buf)
+	buf = bufPool.Get().(*bytes.Buffer)
+	fmt.Printf("[%s]\n", buf)
+	buf = bufPool.Get().(*bytes.Buffer)
+	fmt.Printf("[%s]\n", buf)
+	buf = bufPool.Get().(*bytes.Buffer)
+	fmt.Printf("[%s]\n", buf)
+	buf, _ = bufPool.Get().(*bytes.Buffer)
+	fmt.Printf("[%s]\n", buf)
+        fmt.Printf("len %d",buf.Len() )
+}

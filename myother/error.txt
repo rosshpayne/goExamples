@@ -1,0 +1,27 @@
+package errors
+
+
+type error interface {           // this definition resides in builtin package. Therefore any program can declare "error" as an interface type
+              Error() string
+                     }
+type errortext struct { 
+        err     string
+                  }
+
+func (e *errortext) Error () string {
+          fmt.Printf(" ,e.err)
+       }
+
+func NewError(s string) error {
+         return &errortext{s}
+            }
+
+=====================================
+
+import ("errors")
+
+var newerr error            // this uses inbuilt error definition
+
+newerr := error.NewError("This is the new error")
+
+Println(newerr.Error()) 

@@ -1,0 +1,51 @@
+package main
+
+import (
+       "unsafe"
+       "fmt"
+       "time"
+       )
+
+type  y struct {} 
+var  x struct {
+        a bool
+        b []int       // int is int32 (8 bytes)  MacBook is 64bit
+        c []int
+        d interface{}
+        e time.Duration
+        f y
+             }
+
+func main () {
+       fmt.Println("Sizeof  x:  ",unsafe.Sizeof(x))
+       fmt.Println("Alignof x:  ",unsafe.Alignof(x))
+
+       fmt.Printf("Sizeof   x.a:  %d bytes  %4.3f  words",unsafe.Sizeof(x.a),float32(unsafe.Sizeof(x.a))/8)
+       fmt.Printf("\tAlignof   x.a:  %d bytes  %4.3f  words",unsafe.Alignof(x.a),float32(unsafe.Alignof(x.a))/8)
+       fmt.Printf("\tOffsetof x.a:  %d\n",unsafe.Offsetof(x.a))
+
+       fmt.Printf("Sizeof   x.b:  %d bytes  %4.3f  words",unsafe.Sizeof(x.b),float32(unsafe.Sizeof(x.b))/8)
+       fmt.Printf("\tAlignof   x.b:  %d bytes  %4.3f  words",unsafe.Alignof(x.b),float32(unsafe.Alignof(x.b))/8)
+       fmt.Printf("\tOffsetof x.b:  %d\n",unsafe.Offsetof(x.b))
+
+
+       fmt.Printf("Sizeof   x.c:  %d bytes  %4.3f  words",unsafe.Sizeof(x.c),float32(unsafe.Sizeof(x.c))/8)
+       fmt.Printf("\tAlignof   x.c:  %d bytes  %4.3f  words",unsafe.Alignof(x.c),float32(unsafe.Alignof(x.c))/8)
+       fmt.Printf("\tOffsetof  x.c:  %d bytes\n",unsafe.Offsetof(x.c))
+
+       fmt.Printf("Sizeof   x.d:  %d bytes  %4.3f  words",unsafe.Sizeof(x.d),float32(unsafe.Sizeof(x.d))/8)
+       fmt.Printf("\tAlignof   x.e:  %d bytes  %4.3f  words",unsafe.Alignof(x.a),float32(unsafe.Alignof(x.d))/8)
+       fmt.Printf("\tOffsetof x.d:  %d\n",unsafe.Offsetof(x.d))
+
+       fmt.Printf("Sizeof   x.e:  %d bytes  %4.3f  words",unsafe.Sizeof(x.e),float32(unsafe.Sizeof(x.e))/8)
+       fmt.Printf("\tAlignof   x.e:  %d bytes  %4.3f  words",unsafe.Alignof(x.a),float32(unsafe.Alignof(x.e))/8)
+       fmt.Printf("\tOffsetof x.e:  %d\n",unsafe.Offsetof(x.e))
+
+       fmt.Printf("Sizeof   x.f:  %d bytes  %4.3f  words",unsafe.Sizeof(x.f),float32(unsafe.Sizeof(x.f))/8)
+       fmt.Printf("\tAlignof   x.f:  %d bytes  %4.3f  words",unsafe.Alignof(x.f),float32(unsafe.Alignof(x.f))/8)
+       fmt.Printf("\tOffsetof x.f:  %d\n",unsafe.Offsetof(x.f))
+ 
+}
+
+
+

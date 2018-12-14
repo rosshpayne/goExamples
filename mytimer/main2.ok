@@ -1,0 +1,79 @@
+package main
+
+import (
+	"fmt"
+	"time"
+)
+
+func main() {
+
+	var dur1 time.Duration
+
+	second := time.Second
+	fmt.Println(int64(second / time.Millisecond)) // prints 1000
+	fmt.Println(int64(second / time.Microsecond)) // prints 1000
+	fmt.Println(int64(second / time.Nanosecond))  // prints 1000
+	second = time.Second * 15
+	fmt.Println(int64(second / time.Millisecond)) // prints 1000
+	fmt.Println(int64(second / time.Microsecond)) // prints 1000
+	fmt.Println(int64(second / time.Nanosecond))  // prints 1000
+	//To convert an integer number of units to a Duration, multiply:
+
+	seconds := 10
+	fmt.Println(time.Duration(seconds) * time.Second) // prints 10s
+	dur1, err := time.ParseDuration("14725s")
+	if err != nil {
+		fmt.Println("error in parseduration" + err.Error())
+	}
+	fmt.Printf("%v\n", dur1)
+	fmt.Printf("Duration Hours: %f\n", dur1.Hours())
+	fmt.Printf("Duration : %s\n", dur1.String())
+	fmt.Printf("%v\n", time.Second)
+	fmt.Printf("%v\n", time.Millisecond)
+	fmt.Printf("Now:  %v\n", time.Now())
+	//
+	_, month, day := time.Now().Date()
+	if month == time.July && day == 1 {
+		fmt.Println("Happy Go day!")
+	}
+	//
+	t := time.Date(2009, time.November, 10, 23, 0, 0, 0, time.UTC)
+	fmt.Printf("Go launched at %s\n", t.Local())
+	fmt.Printf("Go launched at %s\n", t.Location())
+	//
+	json, err := t.MarshalJSON()
+	if err != nil {
+		fmt.Printf("error in marshall  " + err.Error())
+	}
+	fmt.Printf("json:  %#v\n", json)
+	fmt.Printf("json:  %s\n", json)
+	//
+	t = time.Date(0, 0, 0, 12, 15, 30, 918273645, time.UTC)
+	round := []time.Duration{
+		time.Nanosecond,
+		time.Microsecond,
+		time.Millisecond,
+		time.Second,
+		2 * time.Second,
+		time.Minute,
+		10 * time.Minute,
+		time.Hour,
+	}
+
+	for _, d := range round {
+		fmt.Printf("t.Round(%6s) = %s\n", d, t.Round(d).Format("15:04:05.999999999"))
+	}
+	//
+	t2dur, err := time.ParseDuration("6s")
+	if err != nil {
+		fmt.Println( err.Error())
+                return
+	}
+	t2 := time.NewTimer(t2dur)
+	select {
+	case <-t2.C:
+		fmt.Println("time Timer has ticked 6seconds\n")
+                t2.Stop()
+	}
+
+}

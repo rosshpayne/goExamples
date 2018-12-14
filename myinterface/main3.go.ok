@@ -1,0 +1,32 @@
+package main
+
+
+import (
+	"fmt"
+)
+type AnyM  []interface{}					// store anything in this slice.   Must use type assertion to get at the concrete type of each element before
+								//   it is truly useful though.
+
+type ma [5]int
+func sq (x int) int { return x*x}
+
+func main() {
+	xx:=make(AnyM,5)
+	xs:=ma{1,2,3,4,5}
+        f1:=sq
+	fmt.Println(len(xx),cap(xx),xx)
+	xx[0]=1
+	xx[1]=2.33
+	xx[2]=f1
+	xx[3]=xs
+	fmt.Println(len(xx),cap(xx),xx)
+	//
+	s1:=xx[3]
+	switch i:=s1.(type) {
+	case int: fmt.Printf("s1 is an int  %d\n",i)
+	case float32: fmt.Printf("s1 is a float  %v\n",i)
+	case ma: fmt.Printf("s1 is a array  %v\n",i)
+	case func (x int) int: fmt.Printf("s1 is a func %v ",i(5))
+        }
+
+}

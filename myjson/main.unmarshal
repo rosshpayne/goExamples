@@ -1,0 +1,58 @@
+package main
+
+
+import (
+       "fmt"
+       "encoding/json"
+       )
+
+func main () {
+b := []byte(`{"Name":"Wednesday","Age":6,"Parents":["Gomez","Morticia"]}`)      // use conversion to take  a string (representing a json object and convert to []byte (slice)
+
+var f interface{}               // anything interface value - when we don't know anything about the json to unmarshall into go data-structures
+
+err := json.Unmarshal(b, &f)    // why pointer? Becasuse pass by value for non reference type will loose work from function when returned.
+if err != nil { panic(err) }
+/*
+bool, 		for JSON booleans
+float64, 	for JSON numbers
+string, 	for JSON strings
+[]interface{}, 	for JSON arrays
+map[string]interface{}, for JSON objects
+nil 		for JSON null
+*/
+
+if m,ok := f.(map[string]interface{}); ok {  // use type assertion to check if f represents this particular concrete type
+   for k, v := range m {               // interrogate m now that we know it must be a map. Range will return key,value 
+       switch vv := v.(type) {
+       case string:
+           fmt.Println(k, "is string", vv)
+       case int:
+           fmt.Println(k, "is int", vv)
+       case []interface{}:
+           fmt.Println(k, "is an array:")
+           for i, u := range vv {
+               fmt.Println(i, u)
+           }
+       case float64:
+           fmt.Println(k,"is a number",vv)
+       default:
+           fmt.Println(k, "is of a type I don't know how to handle")
+       }
+    }
+} 
+
+type FamilyMember struct {
+    Name    string
+    Age     int
+    Parents []string
+}
+
+    var m FamilyMember                      // all field values assigned nil
+    err = json.Unmarshal(b, &m)             // unmarshal will populate Parents field which is currently nil
+
+    fmt.Println("Parents: ",len(m.Parents), m.Parents)
+    fmt.Printf("Parents: %#v",m.Parents)
+
+
+}

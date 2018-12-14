@@ -1,0 +1,114 @@
+package main
+
+import (
+       "fmt"
+       )
+
+/*  Slices utlimately take a copy of the underlying structure (array) in all cases
+
+
+*/
+
+func main () {
+   
+      var s1 = make([]int,10) 
+      var s2 = []int{6,7,8,9,6,7,8}
+      var s3 = make([]int,2)
+
+      fmt.Println("s1: ",len(s1),cap(s1), s1)
+      fmt.Println("s2: ",len(s2),cap(s2), s2)
+
+      s1 = append(s1,1,2,3,4,5);
+
+      fmt.Println("s1: ",len(s1),cap(s1), s1)
+      //
+      // how copy works:   1.  len=min(len of arg1, len of arg2) - return len
+      //                   2.  dest a:b   start at a and copy upto b or len of arg2
+      //                   3.  src  c:d OR c:len 
+      //                   4   dest & src slices are arguments so results are available to caller.
+      //
+      //s3:=s1[:]
+      copy(s3,s2)           // s3 has len 2, s2 has len 4, so copy copies first two elements of s2 into s3.  Does not change len of s3.
+      fmt.Println("s3: after copy(s3,s2) ",len(s3),cap(s3), s3)
+      //
+      // to make copy of s1 - assignment is not a copy as it will share the underlying array. Update or copy s1 and you update s3.
+      //
+      s3=s1
+      fmt.Println("s1: after s3=s1 ",len(s1),cap(s1), s1)
+      fmt.Println("s3: after s3=s1 ",len(s3),cap(s3), s3)
+      s1[1]=-1
+      fmt.Println("s1: after s1[1:1]=-1",len(s1),cap(s1), s1)
+      fmt.Println("s3: after s1[1:1]=-1",len(s3),cap(s3), s3)
+      fmt.Println("####   copy(s1,s2)")
+      //
+      // copy into s2 also changes s3 
+      // 
+      l := copy(s1,s2)                             // copies s2 to beginning of s1 as if s1[0:len(s2)] was specified
+      //s1=append([]int(nil),s2...)
+      fmt.Println("s1    , len,s1: ",l,len(s1),cap(s1), s1)
+      fmt.Println("s3    , len,s3: ",l,len(s3),cap(s1), s3)
+      fmt.Println()
+      //
+      //  Now make a copy of s1 to s3: note s1 must have same len as s3 because of original assignment s3=s1
+      //
+      copy(s3,s1)
+      fmt.Println("s1    , len,s1: ",l,len(s1),cap(s1), s1)
+      fmt.Println("s3    , len,s3: ",l,len(s3),cap(s1), s3)
+      s1[1]=-1
+      fmt.Println("s1: after s1[1:1]=-1",len(s1),cap(s1), s1)
+      fmt.Println("s3: after s1[1:1]=-1",len(s3),cap(s3), s3)
+      //
+      // make new slice with same len as s1  and copy s1 to it.  Works
+      //
+      s4:=make([]int,len(s1)) 
+      copy(s4,s1)
+      fmt.Println("s1: ",len(s1),cap(s1), s1)
+      fmt.Println("s4: ",len(s4),cap(s4), s4)
+      s1[2]=-1
+      fmt.Println("s1: ",len(s1),cap(s1), s1)
+      fmt.Println("s4: ",len(s4),cap(s4), s4)
+      //
+      // make new slice with same len as s1  and copy s1 to it.  Works
+      //
+      s5:=make([]int,len(s1)) 
+      copy(s5[2:],s1)                                // copy s1 to s5[2:] 
+      fmt.Println("s1: ",len(s1),cap(s1), s1)
+      fmt.Println("s5: ",len(s5),cap(s5), s5)
+      //
+      // make new slice with same len as s1  and copy s1 to it.  Works
+      //
+      s6:=make([]int,len(s1)) 
+      copy(s6[5:],s1[2:])                            // copy s1 starting at 2: to s6[5:] 
+      fmt.Println("s1: ",len(s1),cap(s1), s1)
+      fmt.Println("s6: ",len(s6),cap(s6), s6)
+      //
+      // make new slice with same len as s1  and copy s1 to it.  Works
+      //
+      s7:=make([]int,len(s1)) 
+      l=copy(s7[5:],s1[:5])                            // copy s1 starting at 0:5 to s7[5:] 
+      fmt.Println("s1: ",len(s1),cap(s1), s1)
+      fmt.Println("s7: ",len(s7),cap(s7), s7,l)
+      //
+      // make new slice with same len as s1  and copy s1 to it.  Works
+      //
+      s8:=make([]int,len(s1)) 
+      l=copy(s8[:5],s1[:7])                            // copy into s8 first 5 elements the first 5 elements of s1. Copies min of [:5] & [:7]
+      fmt.Println("s1: ",len(s1),cap(s1), s1)
+      fmt.Println("s8: ",len(s8),cap(s8), s8,l)
+      //
+      // make new slice with same len as s1  and copy s1 to it.  Works
+      //
+      s9:=make([]int,len(s1)) 
+      l=copy(s9[:5],s1)                            // copy into s9 first 5 elements the first five elements of s1. Again number of elements is the min of s9[:5] or s1.
+      fmt.Println("s1: ",len(s1),cap(s1), s1)
+      fmt.Println("s9: ",len(s9),cap(s9), s9,l)
+      //
+      // make new slice with same len as s1  and copy s1 to it.  Works
+      //
+      s9:=make([]int,len(s1)) 
+      l=copy(s9[:5],s1)                            // copy into s9 first 5 elements the first five elements of s1. Again number of elements is the min of s9[:5] or s1.
+      fmt.Println("s1: ",len(s1),cap(s1), s1)
+      fmt.Println("s9: ",len(s9),cap(s9), s9,l)
+
+
+}

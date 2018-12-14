@@ -1,0 +1,42 @@
+package main
+
+import (
+	"fmt"
+	"os"
+        "log"
+        "bufio"
+)
+
+func main() {
+        //
+        // open file
+        //
+	file, err := os.Open("/Users/rosspayne/go/src/gopl.io/mylog/main.go")    // file is *os.File
+        if err != nil {
+                      log.Fatal(err);
+                      }
+        //
+        //  create scanner - allocates internal buffer or you can create own buffer and assign.
+        //
+        scanbuf := make([]byte,32*1024);
+        scanner := bufio.NewScanner(file)       // calls (*file).Read
+                                                // default internal buffer size MaxScanTokenSize (64kB) 
+        scanner.Buffer(scanbuf,80)
+        fmt.Println(cap(scanbuf),len(scanbuf))
+        scanner.Split(bufio.ScanLines)
+        //
+        // read from file
+        //
+	for {
+		if scanner.Scan()  {
+			fmt.Printf("%s\n",scanner.Text())
+		} else {
+                        if err:=scanner.Err(); err != nil {       // EOF will be nil as its not an error
+                             log.Fatal(err)
+                        } else {
+                             break;  // EOF
+                        }
+                } 
+	}
+        fmt.Println(cap(scanbuf),len(scanbuf))
+}

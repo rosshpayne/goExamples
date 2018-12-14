@@ -1,0 +1,33 @@
+package main
+
+import (
+       "io"
+       "os"
+       "fmt"
+       "strings"
+       )
+type response struct {
+          Body  io.ReadCloser
+                }
+func main () {
+             var r1 response
+             var buf = make([]byte,20) 
+             rd := strings.NewReader("first reader ")
+             fc,err := os.Open("/Users/rosspayne/go/src/gopl.io/myhttp/main.go")
+             if err != nil { panic(err) }
+             //
+	     r1.Body = struct {
+  		io.Reader              // interace - promote its methodis to struct instance.
+                io.Closer              //   "
+  		}{
+  		rd,                   // concrete type - its Reader interface methods are promoted
+                fc,
+  		}
+             //
+             n,err:=r1.Body.Read(buf)
+             if err != nil { panic(err) }
+             
+   fmt.Printf("%d  %s",n,string(buf))
+   err = r1.Body.Close() 
+   if err != nil { panic(err) }
+}

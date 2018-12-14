@@ -1,0 +1,62 @@
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	"time"
+)
+
+func main() {
+
+	var c = make(chan struct{})
+	//var abort = make(chan int)
+	ctx, cancel := context.WithCancel(context.Background())
+
+	gen := func(ctx context.Context) {
+		fmt.Println("gen sleep generator")
+		go func(ctx context.Context) {
+			for {
+				select {
+				case <-ctx.Done():
+					fmt.Println("Done sleep generator..")
+					return
+				default:
+					time.Sleep(12 * time.Second)
+					select // non-blocking abort check.
+					{
+					case <-ctx.Done():
+						fmt.Println("Done sleep generator..")
+						return
+					default:
+					}
+					c <- struct{}{}
+				}
+			} // end for
+		}(ctx) // end func
+	}
+
+	go func(cancel_ context.CancelFunc) { os.Stdin.Read(make([]byte, 1)); cancel_() }(cancel)
+
+	for i := 0; i < 5; i++ {
+		gen(ctx)
+		time.Sleep(2500 * time.Microsecond)
+	}
+
+	for {
+		select {
+		case m := <-c:
+			fmt.Printf("%v channel c received something\n", m)
+		case t := <-time.After(5 * time.Second): // makes & send channel then runs in gorountine sending time to channel at each interval
+			fmt.Println("time.After at: %v", t)
+		case <-ctx.Done():
+			fmt.Printf("main existing..")
+                        for i:=0;i<14;i++ {
+			      time.Sleep(1 * time.Second)
+                              fmt.Printf("%c",'.')
+                        }
+			return
+		}
+	}
+
+}

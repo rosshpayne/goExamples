@@ -1,0 +1,62 @@
+package main
+
+import (
+	"bytes"
+	"fmt"
+        "strconv"
+)
+
+func main() {
+        fmt.Printf("[%q]", bytes.Trim([]byte("!!! !Achtung! Achtung! !!! "), "!"))
+        //
+	var b bytes.Buffer      // A Buffer needs no initialization.
+				// Buffer is a struct containing short []byte array which will be
+				// enlargened if necessary - an optimisation.
+        fmt.Println("after declaration cap len: ",b.Cap(),b.Len())
+	b.Write([]byte("Hello ")) // convert sting Hello to []byte, use Write method to write to buffer b
+			   	  // if string cannot fit in preallocated []byte in Buffer it will be enlargened.
+        fmt.Println("after write cap, len: ",b.Cap(),b.Len())
+        b.Grow(1000)
+        fmt.Println("cap: ",b.Cap())
+        fmt.Println("len: ",b.Len())
+        for i:=0; i<20; i++ {
+	   fmt.Fprintf(&b, "world_"+strconv.Itoa(i)+" ") 
+           fmt.Printf("\nFprintf:  len, cap: %d %d\n",b.Len(),b.Cap())
+        }
+        //
+        // print contents of buffer - does not advance read pointer. Len (unread bytes) remains the same.
+        //
+        fmt.Println(b.String());
+        fmt.Printf("\nString():  unread, cap: %d %d\n",b.Len(),b.Cap())
+        //
+        p:=make([]byte,10);
+        for i,rindex:=0,0; i<5; i++ {
+           n,err:=b.Read(p)
+           rindex+=n; 
+           if err != nil { fmt.Println("error in Read: ",err.Error); }
+           fmt.Printf("\nRead():  rindex, unread: %d %d %s\n",rindex,b.Len(),p)
+        }
+        //
+        fmt.Printf("\nBefore Truncate():  len, cap: %d %d\n",b.Len(),b.Cap())
+        b.Truncate(30);
+        fmt.Printf("\nAfter Truncate():  len, cap: %d %d\n",b.Len(),b.Cap())
+        fmt.Println(b.String());
+        fmt.Printf("\nString():  unread, cap: %d %d\n",b.Len(),b.Cap())
+        for i,rindex:=0,0; i<2; i++ {
+           n,err:=b.Read(p)
+           rindex+=n; 
+           if err != nil { 
+               fmt.Println("error in Read: ",err.Error()); 
+               break;
+           } else {
+               fmt.Printf("\nRead():  rindex, unread: %d %d %s\n",rindex,b.Len(),p)
+           }
+        }
+        //
+        for i:=0; i<20; i++ {
+	   fmt.Fprintf(&b, "world_"+strconv.Itoa(i)+" ") 
+           fmt.Printf("\nFprintf:  len, cap: %d %d\n",b.Len(),b.Cap())
+        }
+        fmt.Println(b.String());
+        fmt.Printf("\nString():  unread, cap: %d %d\n",b.Len(),b.Cap())
+}

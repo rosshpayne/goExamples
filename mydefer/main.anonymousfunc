@@ -1,0 +1,33 @@
+package main
+
+import (
+  	"log"
+ 	"os"
+	"fmt"
+)
+
+func close(f *os.File) func () {
+          fmt.Println("closing file..")
+          f.Close()
+          return func() { fmt.Println("in Func..") }
+}
+
+
+func main () {
+        f,err := os.OpenFile("/tmp/ftype",os.O_RDWR, 0755)
+        if err != nil {
+                fmt.Println("OpenFile: ");
+		log.Fatal(err)
+	}
+	defer close(f)
+        f.Seek(0,2)
+	n,err := f.Write([]byte("Hello there...again\n\n"))
+        fmt.Println("Write: ");
+        if err != nil {
+                fmt.Println("Write error: ",err.Error());
+		//log.Fatal(err)
+	}
+        fmt.Println("n = ",n)
+        return
+}        
+       

@@ -1,0 +1,68 @@
+package main
+
+import (
+    "fmt"
+    "log"
+
+    "github.com/aws/aws-sdk-go/aws"
+    "github.com/aws/aws-sdk-go/aws/credentials"
+    "github.com/aws/aws-sdk-go/aws/session"
+    "github.com/aws/aws-sdk-go/service/dynamodb"
+    _ "github.com/aws/aws-sdk-go/service/dynamodb/dynamodbattribute"
+    "github.com/aws/aws-sdk-go/service/dynamodb/expression"
+)
+
+
+/* Conditional Insert example.  Do not overwrite (default behaviour) if key=2013 present
+
+*/
+
+func main() {
+
+	sess, err := session.NewSession(&aws.Config{
+	Region: aws.String("ap-southeast-2"),
+	Credentials: credentials.NewSharedCredentials("", "bob-developer"),
+	})
+    	if err != nil {
+        	fmt.Println("Error creating session:")
+		log.Panic(err)
+    	}
+    	// Create DynamoDB client
+    	svc := dynamodb.New(sess)
+	//
+	// Operation:  getItem    requires a Key expression containing both partition and sort key ie.  year=? AND title=?
+	//
+	// Create a KeyConditionBuilder using:   KeyAnd( left, right KeyConditionBuilder) KeyConditionBuilder
+	//                                  
+	//                                where left is Partition key value: expression.Key("year").Equal(expression.Value("2013"))
+	//                                     right is Sort key value:      expression.Key("title").Equal(expression.Value("The Big New Movie")
+        //
+	cond := expression.KeyAnd( expression.Key("year").Equal(expression.Value("2013")), expression.Key("title").Equal(expression.Value("The Big New Movie")) )
+	//
+	// create expression from builder.  expression methods provides the struct values in the GetItemInput
+	//
+        expr,err:= expression.NewBuilder().WithKeyCondition(cond).Build()
+
+	fmt.Println("Condition :  ",*(expr.Condition()));
+	for k,v := range expr.Names() {
+		fmt.Printf("\n %s  %s",k,*v)
+	}
+	fmt.Printf("\n Condition : %s \n",expr.Values());
+
+	input := &dynamodb.GetItemInput{
+    		Key:                       expr.KeyCondition(),		
+  		ExpressionAttributeNames:  expr.Names(),		
+  		ExpressionAttributeValues: expr.Values(),
+    		TableName:              aws.String("Movies"),
+		ReturnConsumedCapacity: aws.String("TOTAL"),
+		}
+
+        outp, err := svc.GetItem(input)					// insert item & create attributes as required.
+        if err != nil {
+            fmt.Println("*****  Got error calling PutItem:")
+            fmt.Println(err.Error())
+        }  else {
+	    fmt.Println(outp)
+            fmt.Println("\n\nSuccessfully fetched item :'",outp.Item.year,"' (",outp.Item.title,") to Movies table")
+	}
+}

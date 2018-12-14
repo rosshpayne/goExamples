@@ -1,0 +1,29 @@
+DEBUG: Request dynamodb/ListTables Details:
+---[ REQUEST POST-SIGN ]-----------------------------
+POST / HTTP/1.1
+Host: dynamodb.ap-southeast-2.amazonaws.com
+User-Agent: aws-sdk-go/1.12.30 (go1.8.1; darwin; amd64)
+Content-Length: 2
+Accept-Encoding: identity
+Authorization: AWS4-HMAC-SHA256 Credential=AKIAJDRVEI6FZVLYJ2XQ/20171126/ap-southeast-2/dynamodb/aws4_request, SignedHeaders=accept-encoding;content-length;content-type;host;x-amz-date;x-amz-target, Signature=ecb20966c9741d40448b5c4b12b54e15f3ca036fe20ef5df5c0e34dca86acc6e
+Content-Type: application/x-amz-json-1.0
+Customheader: 10
+X-Amz-Date: 20171126T022525Z
+X-Amz-Target: DynamoDB_20120810.ListTables
+
+{}
+-----------------------------------------------------
+DEBUG: Response dynamodb/ListTables Details:
+---[ RESPONSE ]--------------------------------------
+HTTP/1.1 200 OK
+Content-Length: 25
+Connection: keep-alive
+Content-Type: application/x-amz-json-1.0
+Date: Sun, 26 Nov 2017 02:25:25 GMT
+Server: Server
+X-Amz-Crc32: 4062568477
+X-Amzn-Requestid: SVD95VGTIUQD3SLEPA0B1S6SIJVV4KQNSO5AEMVJF66Q9ASUAAJG
+
+
+-----------------------------------------------------
+{"TableNames":["Movies"]}

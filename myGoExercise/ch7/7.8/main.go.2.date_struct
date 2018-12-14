@@ -1,0 +1,98 @@
+package main
+
+import (
+	"time"
+        "sort"
+	"log"
+)
+
+func main () {
+
+	var time_ []time.Time 
+	loc, err := time.LoadLocation("Australia/Sydney")
+	if err != nil {
+		log.Panic(err)
+	}
+
+	time_ = []time.Time{
+		time.Date(2018,5,18,12,13,14,29,loc),
+		time.Date(2018,5,18,12,14,14,29,loc),
+		time.Date(2018,5,18,11, 3,14,29,loc),
+		time.Date(2018,5,18,10,23,14,29,loc),
+		time.Date(2018,5,18,8,13,14,29,loc),
+		time.Date(2018,5,18,13,13,14,29,loc),
+		time.Date(2018,5,18,9,13,14,29,loc),
+		time.Date(2018,5,18,7,13,14,29,loc),
+		}
+	/*
+	var printTimeSlice func () = func () { 
+			for i,t := range time_ {
+				if i==0 {
+					 log.Println("Print Slice")
+					 continue
+				}
+				log.Println(i ,t ,time_[i-1], t.After(time_[i-1]) )
+			}
+	}
+	*/
+  	printTimeSlice := func () { 
+                        for i,t := range time_ {
+                                if i==0 {
+                                         log.Println("Print Time Slice")
+                                         continue
+                                }
+                                log.Println(i ,t ,time_[i-1], t.After(time_[i-1]) )	
+                        }
+        }               
+	printTimeSlice()
+	//
+	// ascending time order
+	//
+	sort.Slice(time_, func (i,j int) bool { return time_[i].Before(time_[j] ) } )	// less(i,j) where i = j-1
+  	printTimeSlice()	
+	//
+	// descending time order
+	//
+	sort.Slice(time_, func (i,j int) bool { return ! time_[i].Before(time_[j] ) } )
+  	printTimeSlice()	
+
+	int_ := []int{8,3,9,4,7,4,2,5,1}
+
+  	printIntSlice := func () { 
+                        for i,t := range int_ {
+                                if i==0 {
+                                         log.Println("Print Int Slice")
+                                         continue
+                                }
+                                log.Println(i ,t ,int_[i-1], int_[i] < int_[i-1])
+                        }
+        }               
+	printIntSlice()
+	sort.Ints(int_)
+	printIntSlice()
+
+	struct_ := []struct{x ,y int}{ {1,2}, {3,5}, {5,9}, {9,4}, {6,7}, {8,3}, {1,5}, {3,4}, {5,1}, {5,4}, {5,12}, {1,6}, {1,3} }
+	struct_2 := []struct{x ,y int}{ {1,2}, {3,5}, {5,9}, {9,4}, {6,7}, {8,3}, {1,5}, {3,4}, {5,1}, {5,4}, {5,12}, {1,6}, {1,3} }
+
+  	printStructSlice := func (s []struct{x,y int}, ar...string ) { 
+			ty:=""
+			if len(ar) > 0 {
+				ty=ar[0]
+			}
+                        for i,t := range s {
+                                if i==0 {
+                                         log.Println("\n **** Print Struct Slice "+ty)
+                                         continue
+                                }
+                                log.Println(i ,t ,s[i-1] )
+                        }
+        }               
+
+	printStructSlice(struct_)
+        sort.Slice(struct_, func(i,j int) bool { return struct_[i].x < struct_[j].x } )
+	printStructSlice(struct_)
+
+	printStructSlice(struct_2)
+        sort.SliceStable(struct_2, func(i,j int) bool { return struct_2[i].x < struct_2[j].x } )
+	printStructSlice(struct_2,"Stable")
+}

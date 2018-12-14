@@ -1,0 +1,26 @@
+package main
+
+import (
+       "unsafe"
+       "fmt"
+       )
+
+func main () {
+
+     //func p (f float64) uint64 {                     // doesn't work
+     p:=func (f float64) uint64 {                     //  function literal - assigned to variable. p is a function value.
+           return *(* uint64)(unsafe.Pointer(&f))     //   *T(<oldtype>) - dereference of a conversion to T of pointer to float64. Brackets required 
+    						      //                   treat &f as pointer to unint64 and dereference 
+          }
+
+     fmt.Printf("%T\n",p)
+     fmt.Printf("1 %T %064[1]b %064b\n",p(1.0),1);    // # adds leading zeros
+     fmt.Printf("2 %16x\n",p(1.0));                   // hex with size 16
+     fmt.Printf("3 %x\n",p(1.0));     		      // hex with default size (16)
+     fmt.Printf("4 %#x\n",p(1.0));                    // hex with leading 0x
+     fmt.Printf("5 %#x\n",p(1<<32-1));                // hex with leading 0x
+     fmt.Printf("6 %#o\n",p(1<<64-1));                // octal with leading 0
+     fmt.Printf("7 %d %#[1]x %#64[1]b\n",uint64(1<<64-1),p((1<<64)-1));
+     fmt.Printf("8 %g %#64[1]b %#64[1]b\n",float64(1<<64-2),p((1<<64)-2));
+}
+

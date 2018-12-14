@@ -1,0 +1,32 @@
+package main
+
+import (
+_	"bytes"
+	"os"
+	"log"
+)
+
+func main() {
+	var (
+		//buf    bytes.Buffer
+		xx     = 23
+		//logger = log.New(&buf, "INFO: ", log.Lshortfile)
+		//logger = log.New(os.Stdout, "INFO: ", log.LstdFlags)
+		//logger = log.New(os.Stdout, "INFO: ", log.Lshortfile)
+		logger = log.New(os.Stdout, "INFO: ", log.Llongfile)
+
+		infof = func(info string) {
+			logger.Output(1, info)             // 1 means print line where we call Output
+			logger.Output(2, "adsf adf skek")  // 2 means prints line of caller
+			logger.Print("adsf adf skek",xx)
+		}
+	
+	)
+
+//	log.Fatal(91)
+	infof("Hello world")     // 23
+	infof("Hello world 2")   // 24
+	infof("Hello world 3")
+        //log.Print(&buf)
+        //log.Print(&buf)
+}

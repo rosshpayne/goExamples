@@ -1,0 +1,48 @@
+
+*****************^^^^^^^^^*****************
+DEBUG: Request dynamodb/ListTables Details:
+---[ REQUEST POST-SIGN ]-----------------------------
+POST / HTTP/1.1
+Host: dynamodb.ap-southeast-2.amazonaws.com
+User-Agent: aws-sdk-go/1.12.30 (go1.8.1; darwin; amd64)
+Content-Length: 2
+Accept-Encoding: identity
+Authorization: AWS4-HMAC-SHA256 Credential=AKIAJDRVEI6FZVLYJ2XQ/20171127/ap-southeast-2/dynamodb/aws4_request, SignedHeaders=accept-encoding;content-length;content-type;host;x-amz-date;x-amz-target, Signature=4c4786743d435b1932be6f5d6c4ad03ba18f4fd3b9d17e6eb9c66151ac4a7c05
+Content-Type: application/x-amz-json-1.0
+Customheader: 10
+X-Amz-Date: 20171127T001323Z
+X-Amz-Target: DynamoDB_20120810.ListTables
+
+{}
+-----------------------------------------------------
+DEBUG: Response dynamodb/ListTables Details:
+---[ RESPONSE ]--------------------------------------
+HTTP/1.1 200 OK
+Content-Length: 25
+Connection: keep-alive
+Content-Type: application/x-amz-json-1.0
+Date: Mon, 27 Nov 2017 00:13:24 GMT
+Server: Server
+X-Amz-Crc32: 4062568477
+X-Amzn-Requestid: DBNJ3ONAEU4OQMDNHEA3TSNL2VVV4KQNSO5AEMVJF66Q9ASUAAJG
+
+
+-----------------------------------------------------
+{"TableNames":["Movies"]}
+-------------------
+DEBUG: Response dynamodb/ListTables Details:
+---[ RESPONSE ]--------------------------------------
+HTTP/1.1 400 Bad Request
+Content-Length: 164
+Connection: keep-alive
+Content-Type: application/x-amz-json-1.0
+Date: Mon, 27 Nov 2017 00:05:19 GMT
+Server: Server
+X-Amz-Crc32: 2139606068
+X-Amzn-Requestid: 9P6M8N5B3P4A0NVUPJ2N0R9JF3VV4KQNSO5AEMVJF66Q9ASUAAJG
+
+
+-----------------------------------------------------
+{"__type":"com.amazon.coral.service#InvalidSignatureException","message":"Found both 'X-Amz-Algorithm' as a query-string param and 'Authorization' as HTTP header."}
+
+****************@@@@*********************************

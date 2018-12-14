@@ -1,0 +1,13 @@
+package main
+
+import (
+      "time"
+      "fmt"
+       )
+
+func main () {
+     c := time.Tick(4 * time.Second)                   // returns channel & sends a "tick" to channel every duration of time
+     for now := range c {                              // use range to receive from channel. Range will block on channel until sender sends.
+             fmt.Printf("%v %s\n", now, time.Now())
+     }
+}

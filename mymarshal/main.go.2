@@ -1,0 +1,28 @@
+package main
+
+import (
+	"encoding/json"
+	"fmt"
+)
+
+func main() {
+	var jsonBlob = []byte(`[
+		{"Name": "Platypus", "Order": "Monotremata"},
+		{"Name": "Quoll",    "Order": "Dasyuromorphia"}
+	]`)
+	type Animal struct {
+		Name  string
+		Order string
+	}
+	//
+	// unmarshal will take a array of JSON objects and create a []Animal structs.  
+	//  We supply the struct and unmarshal will do the rest, ie. create a slice create an element for each object in the JSON array.
+	//
+	var animals []Animal
+	err := json.Unmarshal(jsonBlob, &animals)
+	if err != nil {
+		fmt.Println("error:", err)
+	}
+	fmt.Printf("%+v", animals)
+	fmt.Printf("\n%#v %[1]T", animals)
+}

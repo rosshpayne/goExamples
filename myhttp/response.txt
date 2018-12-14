@@ -1,0 +1,23 @@
+ http.Request{
+Method:"GET"
+, URL:(*url.URL)(0xc42008e200)
+, Proto:"HTTP/1.1"
+, ProtoMajor:1
+, ProtoMinor:1
+, Header:http.Header{}
+, Body:io.ReadCloser(nil)
+, GetBody:(func() (io.ReadCloser , error))(nil)
+, ContentLength:0
+, TransferEncoding:[]string(nil)
+, Close:false
+, Host:"www.google.com"
+, Form:url.Values(nil)
+, PostForm:url.Values(nil)
+, MultipartForm:(*multipart.Form)(nil)
+, Trailer:http.Header(nil)
+, RemoteAddr:""
+, RequestURI:""
+, TLS:(*tls.ConnectionState)(nil)
+, Cancel:(<-chan struct {})(nil)
+, Response:(*http.Response)(nil)
+, ctx:context.Context(nil)}

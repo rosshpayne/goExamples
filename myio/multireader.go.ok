@@ -1,0 +1,34 @@
+package main
+
+import (
+	"io"
+	"log"
+	"os"
+        "fmt"
+	"strings"
+        "reflect"
+)
+
+func main() {
+	r1 := strings.NewReader("first reader ")
+	r2 := strings.NewReader("second reader ")
+	r3 := strings.NewReader("third reader\n")
+	r := io.MultiReader(r1, r2, r3)                   // returns io.Reader type interface
+
+	if _, err := io.Copy(os.Stdout, r); err != nil {        // io.Copy(w io.Writer, r io.Reader) will call r.Read(..) which will read acorss r1,r2,r3
+                                                                // maybe MultiReader writes r1,r2,r3 to an internal buffer and creates a reader on this buffer.
+                                                                // or it creates a []Readers or a struct that contains All readers.
+        // io.Copy simply calls r.Read(..) or it must interrogate r - which is a concrete type that satisifies io.Reader.
+ 	log.Fatal(err)
+	}
+        fmt.Println(reflect.TypeOf(r) )          // *io.multiReader
+        fmt.Println(reflect.TypeOf(r).Kind())    // ptr
+        fmt.Println(reflect.TypeOf(r).Elem())    // io.multiReader
+        fmt.Println(reflect.TypeOf(r).Elem().Kind())    // 
+        fmt.Println(reflect.TypeOf(r).Elem().NumField())    // 
+        fmt.Println(reflect.TypeOf(r).Elem().Field(0).Name)    // 
+        fmt.Println(reflect.TypeOf(r).Elem().Field(0).Type)    // 
+        // where is io.multiReader - atleast fmt can figure that it is one of these and then knows how to handle it. But can reflect show us more. 
+        fmt.Println(reflect.ValueOf(r) )
+
+}

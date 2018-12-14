@@ -1,0 +1,51 @@
+package main
+
+import (
+        "fmt"
+        "log"
+        "os"
+
+        "github.com/aws/aws-sdk-go/aws"
+        "github.com/aws/aws-sdk-go/aws/session"
+        _ "github.com/aws/aws-sdk-go/aws/credentials"
+        "github.com/aws/aws-sdk-go/aws/credentials/stscreds"
+        _ "github.com/aws/aws-sdk-go/service/dynamodb/dynamodbattribute"
+        "github.com/aws/aws-sdk-go/service/dynamodb"
+        )
+
+func main () {
+
+        //tabname_:= os.Args[1]
+
+        // Initial credentials loaded from SDK's default credential chain. Such as
+        // the environment, shared credentials (~/.aws/credentials), or EC2 Instance
+        // Role. These credentials will be used to to make the STS Assume Role API.
+        sess, err := session.NewSession(&aws.Config{ Region: aws.String("ap-southeast-2"),
+					 })
+        if err != nil {
+                fmt.Println("Error creating session:")
+                log.Panic(err)
+        }
+        // Create the credentials from AssumeRoleProvider to assume the role
+        // referenced by the "myRoleARN" ARN.
+        creds := stscreds.NewCredentials(sess, "arn:aws:iam::631795995269:role/dynamoAccess")   // instance role where go prog runs
+
+        // Create service client value configured for credentials
+        // from assumed role.
+        svc := dynamodb.New(sess, &aws.Config{Credentials: creds,
+                                              Region: aws.String("ap-southeast-2"),     // Region where dynamodb table resides
+                                             })
+        // Create DynamoDB client
+        //svc := dynamodb.New(sess)
+
+        tablenameinput:= &dynamodb.DescribeTableInput{}
+
+        for _,tab := range os.Args[1:] {
+                output_,err := svc.DescribeTable( tablenameinput.SetTableName(tab))
+                if err != nil {
+                        fmt.Println("svc.DescribeTable failed..")
+                        log.Panic(err)
+                }
+                fmt.Println(output_.GoString())
+        }
+}

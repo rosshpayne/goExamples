@@ -1,0 +1,42 @@
+package main
+
+import (
+	"fmt"
+	"strings"
+)
+var s = "go世phers"				// strings a UTF8 encoded
+
+func main() {
+	fmt.Println(len(s))
+	fmt.Println(s[:2])
+	fmt.Println(s[2:5])
+	fmt.Println("Range....s is decoded as UTF8 into x and i is byte index into string ")
+	for i,x := range s {			// range is by character (UTF8) not byte, with i being byte index into string. Non-ASCII are represented by multiple bytes.  
+		fmt.Printf("%d %b %[2]c\n",i,x)		// x is UTF8 character (mutlibyte)
+	}
+        fmt.Printf("s = %s\n",s)
+	fmt.Println("\nFor i loop interprets s as byte sequence only..");
+	for i:=0; i< len(s); i++ {		// len is number of bytes (not UTF8 characters) 
+		fmt.Printf("%d  %08[1]b %08b  %[4]c %s\n",i,byte(i),s[i], rune(s[i]))               // %c prints UTF8 character
+	}
+	fmt.Print("golang ,  g   ")
+	fmt.Println(strings.IndexByte("golang", 'g'))
+	fmt.Print("go世phers,  p  ")
+	fmt.Println(strings.IndexByte("go世phers", 'p'))
+	fmt.Print("golang  e  ")
+	fmt.Println(strings.IndexByte("golang", 'e'))
+	fmt.Print("go世phers,  世  ")
+	fmt.Println(strings.IndexRune(s, '世'))
+
+	fmt.Printf("\n%d %[1]c  %[1]b\n",'A')						 //	                    97    a   01100001  ASCII
+	fmt.Printf("\n%d %[1]c  %[1]b\n",'世')						 // note: 1110 from first byte and leading 10 from remaining 3 bytes are stripped out
+	fmt.Printf("\n xe4xb8x96   \xe4\xb8\x96      %d   %[1]c  %[1]b\n","\xe4\xb8\x96")// xe4xb8x96   世    !d(string=世)   世  %!b(string=世)
+	fmt.Printf("\n u4e16       \u4e16            %d   %[1]c  %[1]b\n",'\u4e16')      // u4e16       世        19990   世  100111000010110
+	fmt.Printf("\n U00004e16   \U00004e16        %d   %[1]c  %[1]b\n",'\U00004e16')  // U00004e16   世        19990   世  100111000010110
+ 
+	fmt.Printf("\n%d %[1]b %b %b \n",'\xe4', '\xb8','\x96')		// shows the UTF8 encoding (see page 67 of Go Book)  1110xx.., 10xxx.., 10xxx..  
+//	fmt.Printf("\n%d %[1]s  %[1]b\n",rune('\xe4\xb8\x96'))
+	fmt.Printf("\n%d %[1]c  %[1]b\n",rune('\u4e16'))
+	fmt.Printf("\n%d %[1]c  %[1]b\n",'\u4e16')
+	fmt.Printf("\n%d %[1]c  %[1]b\n",rune('\U00004e16'))
+}

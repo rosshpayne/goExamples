@@ -1,0 +1,49 @@
+package main
+
+import (
+	"fmt"
+	"log"
+	"os"
+        "bytes"
+)
+
+func main() {
+	r, w, err := os.Pipe()
+	if err != nil {
+		log.Fatal(err)
+	}
+	fmt.Println(r.Fd(), w.Fd())
+        in_:=[]byte("A BCDEFGHIjsk")
+        //
+        //  write to pipe
+        //
+	_, err = w.Write(in_)
+	if err != nil {
+		log.Fatal(err)
+	}
+        fmt.Printf("[%s]\n",w.Name())
+        fmt.Printf("[%s]\n",r.Name())
+        //fi:=os.Stat(w.Name())
+        //fmt.Printf("%d\n",fi.Size())
+        //fmt.Printf("%s\n",fi.Mode().String)
+        
+	out_ := make([]byte, 20)
+        //
+        //  read from pipe
+        //
+	_, err = r.Read(out_)
+	if err != nil {
+		log.Fatal(err)
+	}
+        //
+        fmt.Printf("%d\n",'\x00')
+        fmt.Printf("%c\n",[]byte(nil))
+        fmt.Printf("%b\n",[]byte(nil))
+	//fmt.Printf("read in and out: [%d]", bytes.TrimRight(out_,string('\x00')))
+	fmt.Printf("write in: %c\n", in_)
+	fmt.Printf("read out: %c\n", out_)
+	fmt.Printf("Trimmed:  %c\n", bytes.TrimRight(out_,"\x00"))
+	//fmt.Printf("Trimmed:  %c\n", bytes.TrimRight(out_,string([]byte(nil)) ))
+	//fmt.Printf("read in and out: %c", bytes.TrimSpace(out_))
+
+}

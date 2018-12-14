@@ -1,0 +1,49 @@
+package main
+
+import (
+       "io"
+       "os"
+       "fmt"
+//       "strings"
+       )
+type response struct {
+          Body  io.ReadCloser        // struct fields can be interface values.
+                }
+func main () {
+             var r1 response
+             var buf = make([]byte,20) 
+             //rd := strings.NewReader("first reader ")
+             fc,err := os.OpenFile("/Users/rosspayne/go/src/gopl.io/myinterface/test.out", os.O_RDWR|os.O_CREATE, 0755)
+             if err != nil { panic(err) }
+             r1.Body = fc
+             r1.Body.Read(buf)
+             //
+             //  Body is an interface value.  In the response struct its type is io.ReadCloser which is an interface.
+             //  This means that Body must support the following methods
+             //
+             //              Read(p [] byte) (n int, err error)
+             //              Close() (err error) 
+             //
+             // r1.Body = os.Stdin
+             // n,err:=r1.Body.Read(buf)
+             //  if err != nil { panic(err) }
+             //             
+             fmt.Println("%s",string(buf))
+             //
+             // type assertion
+             //
+             switch v := r1.Body.(type) {
+               case *os.File: 
+                             fmt.Println("File..");
+                             v.Read(buf)
+                             v=os.Stdout            // change os.File
+                             v.Write(buf)
+                             v.Close() 
+               case io.Writer:                      // can v satisfy io.Writer.  Interface check does not run if there is a concrete type check like *os.File
+                             fmt.Println("io.Writer..")
+                             n,err:=v.Write([]byte{'a','s','d'});
+                             if err != nil { panic(err) }
+                             fmt.Println("%d",n)
+             }
+             //
+}

@@ -1,0 +1,23 @@
+package main
+
+import (
+	"fmt"
+	)
+
+func square (x int) int { return x*x }
+
+type st func (x int) int				// specify a type of FUNC (<ARGUMENTS>) <RETURN TYPES>
+
+func main () {
+
+	var s st;    					// specify a FUNCTION VALUE s  using type func.
+							//   s is a first class value, it can be passed in functions, returned from a function, assigned :wq
+ to other function values
+	s=square
+
+	// s:=square					// alternative to var
+
+	fmt.Printf("s is of type %T",s);
+	fmt.Printf("\nexecute s(3)    %d",s(3));
+
+}

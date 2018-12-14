@@ -1,0 +1,46 @@
+package main
+
+import (
+	"fmt"
+	"os"
+        "log"
+)
+
+func main() {
+        var bufsize_ int
+        var sinput string
+        //
+        // open file
+        //
+	file, err := os.Open("/Users/rosspayne/go/src/gopl.io/mylog/main.go")
+	if err != nil {
+		log.Fatal(err)  // prints to default logger and calls os.Exit()
+	}
+        fmt.Print("Enter buffer size and name: ")
+	//
+        //  read from Stdin
+        //
+        //_,err=fmt.Fscanf(os.Stdin,"%d %s",&bufsize_,&sinput)
+        //_,err=fmt.Fscan(os.Stdin,&bufsize_,&sinput)
+        _,err=fmt.Scan(&bufsize_,&sinput)
+        if err !=nil { 
+                      log.Fatal(err);
+                     }
+        fmt.Println("bufsize : %d %s",bufsize_,sinput)
+	data := make([]byte, bufsize_)
+        //
+        // read from file
+        //
+	for {
+		count, err := file.Read(data)         // read method that satisfies io.Reader
+                                                      // reads file into data 
+		if err != nil {
+                        if err.Error() == "EOF" {
+                            break;
+                        }
+			fmt.Println("err in read: ", err.Error())
+			log.Fatal(err)
+		}
+		fmt.Printf("read %d bytes:    [%s]\n", count, data[:count])
+	}
+}

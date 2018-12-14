@@ -1,0 +1,26 @@
+POST /
+?X-Amz-Algorithm=AWS4-HMAC-SHA256
+&X-Amz-Credential=AKIAJDRVEI6FZVLYJ2XQ%2F20171127%2Fap-southeast-2%2Fdynamodb%2Faws4_request
+&X-Amz-Date=20171127T001736Z
+&X-Amz-Expires=9900
+&X-Amz-Signature=cd1f831a5f5fb56dc5242b375fd3ca6e172740ffb1e6a3b860dc0aabf75d5ac3
+&X-Amz-SignedHeaders=accept-encoding%3Bcontent-length%3Bcontent-type%3Bhost
+&X-Amz-Target=DynamoDB_20120810.ListTables HTTP/1.1^M
+
+
+DEBUG: Request dynamodb/ListTables Details:
+---[ REQUEST POST-SIGN ]-----------------------------
+POST /?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAJDRVEI6FZVLYJ2XQ%2F20171127%2Fap-southeast-2%2Fdynamodb%2Faws4_request&X-Amz-Date=20171127T002151Z&X-Amz-Expires=9900&X-Amz-Signature=b8698d5ee2ea43549f730c1c5313d24032bff14b05636b4da164fe4bdd32832e&X-Amz-SignedHeaders=accept-encoding%3Bcontent-length%3Bcontent-type%3Bhost&X-Amz-Target=DynamoDB_20120810.ListTables HTTP/1.1^M
+Host: dynamodb.ap-southeast-2.amazonaws.com^M
+User-Agent: aws-sdk-go/1.12.30 (go1.8.1; darwin; amd64) aws-sdk-go/1.12.30 (go1.8.1; darwin; amd64)^M
+Content-Length: 2^M
+Accept-Encoding: identity^M
+Authorization: AWS4-HMAC-SHA256 Credential=AKIAJDRVEI6FZVLYJ2XQ/20171127/ap-southeast-2/dynamodb/aws4_request, SignedHeaders=accept-encoding;content-length;content-type;host;x-amz-date;x-amz-target, Signature=60a87d82cfd28698a19601f03c353b953db2d99c02c854ccfec58579e8896f2b^M
+Content-Type: application/x-amz-json-1.0^M
+Content-Type: application/x-amz-json-1.0^M
+Customheader: 10^M
+X-Amz-Date: 20171127T002151Z^M
+X-Amz-Target: DynamoDB_20120810.ListTables^M
+X-Amz-Target: DynamoDB_20120810.ListTables^M
+^M
+{}/Algor

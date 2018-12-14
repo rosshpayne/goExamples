@@ -1,0 +1,139 @@
+package main
+
+import (
+	"bytes"
+	"fmt"
+)
+
+func main() {
+        array_ := [...]string{1:"adsf",2:"isasdfoi",4:"asdf3as"}  // 0:"",3:""  also intialise array using {..}
+        fmt.Println("array_[2]:  ",array_[2])
+        fmt.Println("array_[2][4:6]:  ",array_[2][4:6])  // prints elements in index 4,5
+        slice_ := array_[:3];
+        slice2_:=slice_[2:3]
+        fmt.Printf("%T\n",array_) 
+        fmt.Println(len(array_),cap(array_));
+        fmt.Printf("%#v\n",slice_);
+        fmt.Println(len(slice_),cap(slice_));
+        fmt.Printf("%#v\n",slice2_);
+        fmt.Println(len(slice2_),cap(slice2_));
+        //
+	aa := []byte("The cat in the hat is a book that is now twenty two years old")  // this is a conversion
+        sa := []byte{'a','b','c','d'}                                                  // this is an intialisation
+        sa2 := []byte{'a','b','c','d'}                                                  // this is an intialisation
+        sa3 := []byte{'a','b','c','3'}                                                  // this is an intialisation
+        //
+        fmt.Println("sa: ",sa);
+	fmt.Printf("aa: [%s]\n", aa)
+	fmt.Println("aa", aa)
+        fmt.Println("len(aa) = ",len(aa))
+        //
+        if bytes.Equal(sa,sa2) {     
+              fmt.Println("byte slices are equal") 
+        } else { 
+              fmt.Println("byte slices are NOT equal") 
+        }
+        if bytes.Equal(sa3,sa2) {     
+              fmt.Println("byte slices are equal") 
+        } else { 
+              fmt.Println("byte slices are NOT equal") 
+        }
+	//
+        s1:=aa[:9]
+        fmt.Println(s1,len(s1),cap(s1))
+        s2:=s1[0:12]
+        fmt.Println(s1,len(s1),cap(s1))      // s1 doesn't change len or cap.
+        fmt.Println(s2,len(s2),cap(s2))
+        //
+	breader := bytes.NewReader(aa)            // create reader whos source is a []byte slice
+        //
+	breaderlen := breader.Len()
+	fmt.Printf("breaderlen: %d\n", breaderlen)
+	fmt.Printf("breader : %T\n", breader)
+	//
+	breadersize := breader.Size()
+	fmt.Printf("breadersize: %d\n", breadersize)
+	//
+	for i := 0; i < breaderlen/2; i++ {
+		cc, err := (*breader).ReadByte()
+		if err != nil {
+			fmt.Println("error in Read", err.Error())
+			return
+		}
+		breadersize = breader.Size()
+		breaderlen = breader.Len()
+		fmt.Printf("breaderlen, breaderlen: %d    %d\n", breadersize, breaderlen)
+		fmt.Println("cc= ", cc)
+	}
+	fmt.Println("----cb []byte  ------")
+	var cby byte = 'a'
+	cb := make([]byte, 6)
+	fmt.Println("After make: ",len(cb), cap(cb))
+        cb[0]='z'
+        cb[1]='t'
+        cb[2]='s'
+        cb[3]='u'
+        cb[4]='v'
+        cb[5]='w'
+	cb = append(cb, cby)
+	fmt.Println("after append: ",len(cb), cap(cb))
+	//cb[7] = 'b'
+	//cb[8] = 'c'
+	fmt.Println("after inde load: ",len(cb), cap(cb))
+	fmt.Printf("cb after append: %s\n",cb)
+	fmt.Printf("cb after append: %q\n",cb)
+        fmt.Println("print using range loop..");
+        for i,k := range cb {         // index,elementValue := range <enumeratable object> {..}
+              fmt.Println(i,k,cb[i]);
+        }
+        fmt.Println("=============");
+        //
+        cb2 := cb[5:9]
+	fmt.Println("new slice cb2: ",len(cb2), cap(cb2))
+	fmt.Println("originating slice cb : ",len(cb), cap(cb))
+        for i,k := range cb2 {         // index,elementValue := range <enumeratable object> {..}
+              fmt.Println(i,k,cb2[i]);
+        }
+        fmt.Println("=============");
+        // test cb & cb2 share underlying array
+        cb[5] ='q';
+        for i,k := range cb2 {         // index,elementValue := range <enumeratable object> {..}
+              fmt.Println(i,k,cb2[i]);
+        }
+        for i,k := range cb {         // index,elementValue := range <enumeratable object> {..}
+              fmt.Println(i,k,cb[i]);
+        }
+        fmt.Println("=============");
+        //
+	//fmt.Println("after cb=[]byte(..", len(cb), cap(cb),cb)
+	//
+	fmt.Println("----About to breader.Read(cb)  ------")
+	fmt.Println("before read:  ", breader.Size(),breader.Len())
+        //
+	len, err := breader.Read(cb)
+        //
+	if err != nil {
+		fmt.Println("error in Read", err.Error())
+		return
+	}
+	fmt.Println("after read:  ", breader.Size(), breader.Len())
+	fmt.Printf("cb=%s\n", cb)
+	cblen := breader.Len()
+	fmt.Printf("cblen  %d  len  %d\n", cblen, len)
+        //
+        fmt.Println(cb);
+	for i := 0; i < cblen; i++ {
+		cc, err := (*breader).ReadByte()
+		if err != nil {
+			fmt.Println("error in Read", err.Error())
+			return
+		}
+		fmt.Println("cc= ", cc)
+	}
+        //
+        fmt.Println("breader left ",breader.Len());
+        breader.Reset(aa);
+        fmt.Println("breader left ",breader.Len());
+        n,err:=breader.ReadAt(cb,4)
+        fmt.Printf("b cb = %d [%s]",n,cb);
+}

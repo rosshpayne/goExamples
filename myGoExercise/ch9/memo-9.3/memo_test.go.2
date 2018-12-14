@@ -1,0 +1,64 @@
+// Copyright © 2016 Alan A. A. Donovan & Brian W. Kernighan.
+// License: https://creativecommons.org/licenses/by-nc-sa/4.0/
+
+package memo_test
+
+import (
+	"testing"
+	_ "time"
+	_ "fmt"
+	"log"
+
+	memo "gopl.io/ch9/memo-9.3"
+	"gopl.io/ch9/memotest"
+)
+
+var httpGetBody = memotest.HTTPGetBody
+var wait int = 800
+
+func TestSeq(t *testing.T) {
+   	defer func() {						// recover can only run in defer. Here is an anonymous func.
+       	if err := recover(); err != nil {
+	     t.Error((err.(memo.Error)).Error())
+       	 }
+    	}()
+//	wait:=2500						// overrides pkg variable wait. Local variable scope precedence higher levels, e.g. loop, func, pkg
+	log.Printf("\nTimeout: %d\n",wait)
+	m := memo.New(httpGetBody,wait)
+	defer m.Close()
+	memotest.Sequential(t, m)
+}
+
+func TestChanWrongType(t *testing.T) {
+   	defer func() {						// recover can only run in defer. Here is an anonymous func.
+       	 if err := recover(); err != nil {
+	     e:=err.(memo.Error)	
+	     t.Error(e.Error()) 	
+       	 }
+    	}()
+	var wait float64 = 64
+	log.Printf("Timeout: %d\n",wait)
+	m := memo.New(httpGetBody,wait)
+	defer m.Close()
+	memotest.Sequential(t, m)
+}
+
+func TestTooManyArgs(t *testing.T) {
+   	defer func() {						// recover can only run in defer. Here is an anonymous func.
+       	 if err := recover(); err != nil {
+	     e:=err.(memo.Error)	
+	     t.Error(e.Error()) 	
+       	 }
+    	}()
+	wait2:=2500
+	log.Printf("Timeout: %d\n",wait)
+	m := memo.New(httpGetBody,wait,wait2)
+	defer m.Close()
+	memotest.Sequential(t, m)
+}
+func TestConcurrent(t *testing.T) {
+	wait:=1500
+	m := memo.New(httpGetBody,wait)
+	defer m.Close()
+	memotest.Concurrent(t, m)
+}

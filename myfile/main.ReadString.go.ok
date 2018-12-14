@@ -1,0 +1,38 @@
+package main
+
+import (
+	"os"
+        "log"
+        "bufio"
+        "fmt"
+       )
+
+var newline byte = '\n' 
+
+func main() {
+        //
+        // open file
+        //
+	file, err := os.Open("/Users/rosspayne/go/src/gopl.io/mylog/main.go")    // file is *os.File
+        if err != nil {
+                      log.Fatal(err);
+                      }
+        //
+        //  create scanner - allocates internal buffer or you can create own buffer and assign.
+        //
+        reader := bufio.NewReader(file)       // ends up calling (*Reader).Read & (*os.File).Read
+                                              // file has no buffer as the file represents the buffer
+        fmt.Printf("Reader's internal Buffer size: %d\n",reader.Buffered) 
+        //
+        // read from file
+        //
+        var stringbuf string            // mem allocated in each call to ReadString. Must be copied into.
+	for {
+		stringbuf,err = reader.ReadString(newline)  // reader calls (*os.File).Read(Buffer) & returns Buffer
+                
+                if err != nil {
+                             log.Fatal(err)
+                }
+                fmt.Printf("%s",stringbuf)
+	}
+}

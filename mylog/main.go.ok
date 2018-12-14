@@ -1,0 +1,22 @@
+package main
+
+import (
+	"bytes"
+	"fmt"
+	"log"
+)
+
+func main() {
+	var buf bytes.Buffer // declaration & auto allocation of []bytes buffer
+	//
+	// buf is a struct, to satisify interface io.Writer need pointer to struct hence &
+	//
+	//A Logger represents an active logging object that generates lines of output to an io.Writer. Each logging operation makes a single call to the Writer's Write method, *bytes.Buffer in ths case. A Logger can be used simultaneously from multiple goroutines; it guarantees to serialize access to the Writer.
+        //
+	logger := log.New(&buf, "loggerX: ", log.Ltime)
+	logger.Print("Hello, log file!") // callls byte.Write(..) to write to buffer buf
+	logger.Print("line2..........")  // each logger Print writes separate line
+	logger.Printf("buf size:  %d %d", buf.Len(), buf.Cap())
+
+	fmt.Print(&buf) // print buffer to stdio
+}

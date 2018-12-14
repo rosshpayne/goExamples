@@ -1,0 +1,19 @@
+package main
+
+import (
+	"log"
+	"os/exec"
+        "fmt"
+)
+
+func main() {
+	cmd := exec.Command("sleep_", "5")
+	err := cmd.Start()
+	if err != nil {
+                fmt.Println(err.Error())
+		log.Fatal(err)
+	}
+	log.Printf("Waiting for command to finish...")
+	err = cmd.Wait()
+	log.Printf("Command finished with error: %v", err)
+}

@@ -1,0 +1,25 @@
+package main
+
+import (
+	"fmt"
+	"unsafe"
+)
+
+type  x struct {
+		a bool
+		b int16
+		c []int
+	}
+
+func main() {
+	//!+main
+        var pb x = x{a: true, b: 12839, c: []int{2,3,45,666}}
+
+	// equivalent to pb := &x.b
+	v := (*int16)(unsafe.Pointer(
+		uintptr(unsafe.Pointer(&pb)) + unsafe.Offsetof(pb.b)))   // here unsafe.Pointer holds the address to x struct. convert to uintprt treats it is an ANY pointer to which we can do pointer arithmetic.
+
+	fmt.Println(*v) // 
+	//!-main
+}
+

@@ -1,0 +1,64 @@
+package main
+
+import (
+	"os"
+        "log"
+        "bufio"
+        "fmt"
+       )
+
+var newline byte = '\n' 
+
+func main() {
+        //
+        // open file
+        //
+	//file, err := os.Open("/Users/rosspayne/go/src/gopl.io/mylog/main.go")    // file is *os.File
+	file, err := os.Open("/Users/rosspayne/Downloads/access_log_1")    // file is *os.File
+        if err != nil {
+                      log.Fatal(err);
+                      }
+        filew,err := os.Create("/Users/rosspayne/Downloads/access_log_1.go.out")
+        if err != nil {
+                      log.Fatal(err);
+                      }
+        //
+        //  create scanner - allocates internal buffer or you can create own buffer and assign.
+        //
+        //reader := bufio.NewReader(file)       // ends up calling (*Reader).Read & (*os.File).Read
+                                              // file has no buffer as the file represents the buffer
+        reader := bufio.NewReaderSize(file,64*1024)
+        fmt.Printf("Reader's internal Buffer size: %d\n",reader.Buffered) // (* os.File) buffer ?
+        //reader.Reset(file)
+        //
+        // read from file
+        //
+        newbuf:=0
+        var linebuf []byte
+	for  {
+		linebuf,err = reader.ReadSlice(newline)  // reader calls (*os.File).Read(Buffer) & returns slice on buffer.
+                                                         //                               ^-4KB default or 64KB with NewReaderSize
+                if err != nil {
+                     if  err.Error() == "EOF" {
+                              break;
+                     } else {
+                             log.Fatal(err)
+                     }
+                }
+                //fmt.Printf("len, cap : %d  %d \n",len(linebuf),cap(linebuf))
+                if cap(linebuf) == 4096 || cap(linebuf) == 64*1024 {
+                      newbuf += 1
+                }
+                //fmt.Printf("%s",linebuf)
+	}
+        fmt.Println("Buffer allocations  ",newbuf)
+        //
+        // write out buffer 
+        //
+        reader.Reset(file)
+        n_,err:=reader.WriteTo(filew)
+        if err != nil && err.Error() != "EOF" {
+                      log.Fatal(err)
+        }
+        fmt.Printf("WriteTo: %d\n",n_) 
+}

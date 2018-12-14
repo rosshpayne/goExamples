@@ -1,0 +1,69 @@
+package main
+
+import (
+	"bytes"
+	"fmt"
+	"os"
+)
+
+func main() {
+	var b bytes.Buffer      // A Buffer needs no initialization.
+				// Buffer is a struct containing short []byte array which will be
+				// enlargened if necessary - an optimisation.
+	b.Write([]byte("Hello ")) // convert sting Hello to []byte, use Write method to write to buffer b
+			   	  // if string cannot fit in preallocated []byte in Buffer it will be enlargened.
+        fmt.Println("cap: ",b.Cap())
+        b.Grow(1000)
+        fmt.Println("cap: ",b.Cap())
+        fmt.Println("len: ",b.Len())
+	fmt.Fprintf(&b, "world!") // use the fact that byte.Buffer satisfies io.Writer interface to write to buffer.
+        b.WriteString(string(" and the cat sat on the mat "))
+        var r rune = '日'
+        b.WriteRune(r);
+        b.WriteByte('c') 
+        //
+	n,_ := b.WriteTo(os.Stdout)      // use buffer method to write contents of buffer to standard output.
+        fmt.Println("\nbytes written to Stdout: ",n)
+        fmt.Printf("\nlen: %d %d\n",b.Len(),b.Cap())
+        //
+        b.WriteString(string("The Guardian news site.."))
+        fmt.Printf("\nlen: %d %d\n",b.Len(),b.Cap())
+	b.WriteTo(os.Stdout)      // can completely ignore return values
+        fmt.Printf("\nlen: %d %d\n",b.Len(),b.Cap())
+        //
+        b.WriteString(string("The Financial Times  news site is better"))
+        s_:=b.String()
+        fmt.Println("s_: ",s_);
+        fmt.Printf("\nString() len: %d %d\n",b.Len(),b.Cap())
+        //
+        slice_ := make([]byte,15) 
+        _,err:=b.Read(slice_)
+        if err != nil { fmt.Println("error in Read:",err.Error()) }
+        fmt.Printf("slice_: %s",slice_)
+        fmt.Printf("\nlen: %d %d\n",b.Len(),b.Cap())
+        fmt.Println(b.String());                         // string doesn't move buffer pointer.
+        fmt.Printf("\nString() len: %d %d\n",b.Len(),b.Cap())
+        _,err=b.Read(slice_)
+        if err != nil { fmt.Println("error in Read:",err.Error()) }
+        fmt.Printf("slice_: %s",slice_)
+        fmt.Printf("\nRead() len: %d %d\n",b.Len(),b.Cap())
+        b.WriteString(string(" and the cat sat on the mat "))
+        fmt.Printf("\nWrite() len: %d %d\n",b.Len(),b.Cap())
+        _,err=b.Read(slice_)
+        if err != nil { fmt.Println("error in Read:",err.Error()) }
+        fmt.Printf("slice_: %s",slice_)
+        fmt.Printf("\nRead() len: %d %d\n",b.Len(),b.Cap())
+        _,err=b.Read(slice_)
+        if err != nil { fmt.Println("error in Read:",err.Error()) }
+        fmt.Printf("slice_: %s",slice_)
+        fmt.Printf("\nRead() len: %d %d\n",b.Len(),b.Cap())
+        _,err=b.Read(slice_)
+        if err != nil { fmt.Println("error in Read:",err.Error()) }
+        fmt.Printf("slice_: %s",slice_)
+        fmt.Printf("\nRead() len: %d %d\n",b.Len(),b.Cap())
+        _,err=b.Read(slice_)
+        if err != nil { fmt.Println("error in Read:",err.Error()) }
+        fmt.Printf("slice_: %s",slice_)
+        fmt.Printf("\nRead() len: %d %d\n",b.Len(),b.Cap())
+        
+}

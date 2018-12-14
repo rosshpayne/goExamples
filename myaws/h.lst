@@ -1,0 +1,23 @@
+This shows that added to the Config() simply adds more NamedHandlers
+
+
+
+    svc := dynamodb.New(sess, aws.NewConfig().WithLogLevel(aws.LogDebugWithHTTPBody).WithLogger(aws.LoggerFunc(loggerfunc)) )
+
+Send HandlerList:  
+request.HandlerList{
+  list:[]request.NamedHandler{request.NamedHandler{Name:"__anonymous", Fn:(func(*request.Request))(0x12cd040)}
+                            , request.NamedHandler{Name:"awssdk.client.LogRequest", Fn:(func(*request.Request))(0x128a740)}
+                            , request.NamedHandler{Name:"core.ValidateReqSigHandler", Fn:(func(*request.Request))(0x128d3a0)}
+                            , request.NamedHandler{Name:"core.SendHandler", Fn:(func(*request.Request))(0x128d580)}
+                            , request.NamedHandler{Name:"awssdk.client.LogResponse", Fn:(func(*request.Request))(0x128ac10)}}
+, AfterEachFn:(func(request.HandlerListRunItem) bool)(nil)}
+
+    svc := dynamodb.New(sess)
+
+Send HandlerList:  
+ request.HandlerList{
+   list:[]request.NamedHandler{request.NamedHandler{Name:"__anonymous", Fn:(func(*request.Request))(0x12ccd10)}
+                             , request.NamedHandler{Name:"core.ValidateReqSigHandler", Fn:(func(*request.Request))(0x128d270)}
+                             , request.NamedHandler{Name:"core.SendHandler", Fn:(func(*request.Request))(0x128d450)}}
+ , AfterEachFn:(func(request.HandlerListRunItem) bool)(nil)}

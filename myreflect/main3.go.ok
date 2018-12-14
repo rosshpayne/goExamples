@@ -1,0 +1,84 @@
+package main
+
+import (
+	"fmt"
+	"reflect"
+	"encoding/json"
+	"strings"
+)
+type Animal int
+
+const (
+	Unknown Animal = iota
+	Gopher
+	Zebra
+)
+
+func (a *Animal) UnmarshalJSON(b []byte) error {
+	var s string
+	if err := json.Unmarshal(b, &s); err != nil {
+		return err
+	}
+	switch strings.ToLower(s) {
+	default:
+		*a = Unknown
+	case "gopher":
+		*a = Gopher
+	case "zebra":
+		*a = Zebra
+	}
+
+	return nil
+}
+
+func main() {
+//	var x float64 = 3.45
+        var chd  reflect.ChanDir = reflect.SendDir
+	fmt.Println(chd.String())
+        chd=reflect.BothDir
+	fmt.Println(chd.String())
+        var zoo []Animal
+	var aa *Animal
+        var cb interface{}				// cb is a interface of ANY 
+        bb:= Animal(Gopher)
+
+        turn(&zoo)
+
+	fmt.Println()
+        aa =&bb
+
+        cc:=interface{}(aa)
+        cb =interface{}(bb)
+	rv :=reflect.ValueOf(cc)
+        rvb:=reflect.ValueOf(cb)
+
+        fmt.Printf("Type cc: %T\n",cb)			// Type cc: main.Animal    
+        fmt.Println(rv.Type())				// *main.Animal
+        fmt.Println(rv.Kind())				// ptr
+        fmt.Println(rv.Type().NumMethod())		// 1
+	fmt.Println(rv.CanAddr())			// false
+
+        fmt.Println(rvb.Type())				// main.Animal
+        fmt.Println(rvb.Kind())				// int
+        fmt.Println(rvb.Type().NumMethod())		// 1
+	fmt.Println(rvb.CanAddr())			// false
+}
+func turn (v interface{}) {
+
+	fmt.Printf("type v: %T\n",v)					// NB: %T prints concrete type if its an interface.
+	fmt.Println("ValueOf: ",reflect.ValueOf(v))			// &[]
+	fmt.Println("TypeOf: ",reflect.TypeOf(v))			// *[]main.Animal ptr
+
+        rv:=reflect.ValueOf(v)
+	fmt.Println( rv.Type())   				 	//  *[]main.Animal
+	fmt.Println( rv.Kind())    				 	//  ptr 
+	fmt.Println( rv.Elem())     					//  []
+	fmt.Println( rv.Elem().String())     				// <[]main.Animal Value>
+	fmt.Println( rv.Elem().Type())     				//  []main.Animal
+
+	fmt.Println( rv.Elem().Type().Elem())     			//  main.Animal    -- need to change this to *main.Animal to count its methods.
+	fmt.Println( rv.Elem().Type().Elem().Kind())    		//  int
+	fmt.Println( rv.Elem().Type().Elem().NumMethod())		//  0
+	fmt.Println( rv.Type().NumMethod())				//  0
+	fmt.Println( reflect.PtrTo(rv.Elem().Type().Elem()).NumMethod())//  1   ** Got it **   reflect.PtrTo did it.
+}

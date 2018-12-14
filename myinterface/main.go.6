@@ -1,0 +1,62 @@
+package main
+
+import (
+       "io"
+       "os"
+       "fmt"
+       "strings"
+       )
+type response struct {
+                     io.Reader          // anonymous embedded structs. Pass in ANY type provide it satifies these interfaces.  go creates a hidden name, named after the type.
+                     }
+//
+// can assign to Body any concrete type that satisifies the interface ReadCloser.
+//
+// we assign it a struct concrete type that inherits methods from its embedded fields.  
+// the methods Read() & Close() 
+// the struct must be assigned field instances in this case rd, fc.
+//
+// we can then call methods in rd & fc via the interface value r1.Body. 
+// 
+func main () {
+             var buf = make([]byte,20) 
+             rd := strings.NewReader("first reader ")
+             fc,err := os.OpenFile("/Users/rosspayne/go/src/gopl.io/myinterface/test.out", os.O_RDWR|os.O_CREATE, 0755)
+             if err != nil { panic(err) }
+             //
+             //  Body is an interface value.  In the response struct its type is io.ReadCloser which is an interface.
+             //  This means that Body must support the following methods
+             //
+             //              Read(p [] byte) (n int, err error)
+             //              Close() (err error) 
+             //
+             //  Using composition by struct embedding we can add support for io.ReadCloser.
+             //  Here we define a struct with two anonymous interface fields of non-primitive types - interfaces.
+             //  The struct has all the methods supported by the interfaces promoted from its field values.
+             //  Once the struct is assigned values, rd,fc, the Struct assigned to Body has access
+             //  to the Read & Close methods in rd, rc.
+             //  Using struct embedding limits the support for the interface to exactly those methods in the composition - no more or no less.
+             //
+ 	     var r1 response = response{
+  		rd,              // concrete type supports io.Reader only
+  		}
+
+ 	     var r2 response = response{
+                fc,              // concrete type supports io.Reader & io.Closer
+  		}
+             //
+             n,err:=r1.Read(buf)
+             if err != nil { panic(err) }
+             fmt.Println("%d  %s",n,string(buf))
+	     //
+             n,err =r2.Read(buf)
+             if err != nil { panic(err) }
+             fmt.Println("%d  %s",n,string(buf))
+	     //
+             if fi,ok := r2.Reader.(io.ReadCloser); ok {	// can reference the anonymous field via Go's generated name after the Type	
+		  fmt.Println("xxxx") 
+                  err=fi.Close()
+                  if err != nil { panic(err) }
+                  fmt.Println("File closed..")  
+	     }
+}

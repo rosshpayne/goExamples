@@ -1,0 +1,148 @@
+package main
+
+import (
+	"encoding/json"
+	"fmt"
+	"strconv"
+	"strings"
+)
+
+func main() {
+	/*  in JSON's {key:value}, keys must be strings and values must be one of the following data types:
+			a string       { "name":"John" }
+			a number       { "name":987 }
+			an object (JSON object)  { "employee":{ "name":"John", "age":30, "city":"New York" } }  ie. a JSON object is a  comma separate list of key:value pairs
+			an array       { "employees":[ "John", "Anna", "Peter" ] }    ie. array is a comma set of same data types values.
+			a boolean      { "sale":true }
+			null           { "middlename":null }
+       */
+
+	// note jsonBlob's type is inferred from literal to be []byte.
+
+	var jsonBlob = []byte(`[                       
+	{"Name": "Platypus", "Order": "Monotremata", "Table": 44, "Chair": true},
+	{"Name": "Quoll",    "Order": "Dasyuromorphia"},
+	{"Height": [44,34] } ]`)
+
+	// the following jsonBlob will require the following Go Type: 
+        //               [] - as we have a JSON array [ ]
+	//               each element in the array is a JSON object which is represted by either interface{} 
+	//                    in the [] literal we define each element as:  map[string]interface{}, which covers all possible object types.
+	//               []interface {}{map[string]interface {}{....}, map[string]interface {}{...}}     where the , separates the slice elements 
+	//
+        //         JSON's values (in key:value) always unmarshall to an interface{} & JSON key always unmarshal to map[string]
+        //
+        //         its always map[string] because json key is always string & a map is an array like struct so we can have any number of key:value in the object
+	//         and the value can be any of the above datatype, so we can use interface{} to include all.
+        //
+	mymap := []map[string]map[int]string{{"map1entry": {1:"fred",2:"mary"},"map2entry": {3:"fred",4:"mary"}},{"map3entry": {1:"fred",2:"mary"},"map4entry": {3:"fred",4:"mary"}}}
+
+	/*type Animal struct {
+		Name  string
+		Order string
+	}*/
+
+	var cfg interface{}                         // cfg is an ANY IV, acceps any concrete type-
+	err := json.Unmarshal(jsonBlob, &cfg)       // Unmarshal will examine jsonBlob and find its [] & create a slice of interface{} in cfg.
+	if err != nil {
+		fmt.Println("error:", err)
+	}
+	//
+        fmt.Println("\n\n****  cfg's static type is interface{} but %T prints its dynamic type component\n")
+	fmt.Printf("cfg dynamic type:  %T",cfg)
+        fmt.Println("\n\n****  %#v prints out the dynamic value in Go format\n")
+	fmt.Printf("%#v",cfg)
+        fmt.Println("\n\n***** %#v compare with mymap\n")
+	fmt.Printf("%#v",mymap)
+        //
+	fmt.Println("\n\n jsonBlob = []byte(`[12,14,26,77 ]`)\n")
+
+	jsonBlob = []byte(`[12,14,26,77 ]`) 
+	err = json.Unmarshal(jsonBlob, &cfg)
+	if err != nil {
+		fmt.Println("error:", err)
+	}
+	fmt.Printf("cfg dynamic type:  %T and its value:  %#v",cfg,cfg)
+
+	fmt.Println("\n\n jsonBlob = []byte("+`{"Heights":[  12,14,26,77 ]}`+"\n")
+
+	jsonBlob = []byte(`{"Heights":[  12,14,26,77 ]}`) 
+	err = json.Unmarshal(jsonBlob, &cfg)
+	if err != nil {
+		fmt.Println("error:", err)
+	}
+	fmt.Printf("cfg dynamic type:  %T and its value:  %#v",cfg,cfg)
+
+	fmt.Println("\n\n jsonBlob = []byte("+`{"Heights":72}`+"\n")
+
+	jsonBlob = []byte(`{"Height":72}`)
+	err = json.Unmarshal(jsonBlob, &cfg)
+	if err != nil {
+		fmt.Println("error:", err)
+	}
+	fmt.Printf("cfg dynamic type:  %T and its value:  %#v",cfg,cfg)
+
+	fmt.Println("\n\n jsonBlob = []byte("+`{"Heights":72,"Age":44}}`+"\n")
+	jsonBlob = []byte(`{"Height":72,"Age":44}`)
+	err = json.Unmarshal(jsonBlob, &cfg)
+	if err != nil {
+		fmt.Println("error:", err)
+	}
+	fmt.Printf("cfg dynamic type:  %T and its value:  %#v\n\n",cfg,cfg)
+
+	xcfg:=[]interface{}{"CAT","Dog","Mouse","Bird","Lion"}
+	n,r:=Get(xcfg,"4.3.2.1")
+	
+	fmt.Printf("\n%T",n)
+	fmt.Printf("\n%s",r.Error())
+
+
+}
+func Get(cfg interface{}, path string) (interface{}, error) {
+        parts := strings.Split(path, ".")
+	fmt.Printf("parts:  %#v\n",parts)
+        // Normalize path.
+        for k, v := range parts {
+                if v == "" {
+                        if k == 0 {
+                                parts = parts[1:]
+                        } else {
+                                return nil, fmt.Errorf("Invalid path %q", path)
+                        }
+                }
+        }
+	fmt.Printf("\nparts:  %#v",parts)
+        // Get the value.
+        for pos, part := range parts {
+                switch c := cfg.(type) {
+                case []interface{}:
+                        fmt.Printf("\n\npos, %d  part = %s",pos, part)
+                        if i, error := strconv.ParseInt(part, 10, 0); error == nil {
+		                fmt.Printf("\n i=%d  len(c) %d",i,len(c))
+                                if int(i) < len(c) {
+                                        cfg = c[i] 
+                                } else {
+                                        return nil, fmt.Errorf(
+                                                "Index out of range at %q: list has only %v items",
+                                                strings.Join(parts[:pos+1], "."), len(c))
+                                }               
+                        } else {
+                                return nil, fmt.Errorf("InvaXXlid list index at %q",
+                                        strings.Join(parts[:pos+1], "."))
+                        }               
+                case map[string]interface{}:
+                        if value, ok := c[part]; ok {
+                                cfg = value
+                        } else {
+                                return nil, fmt.Errorf("Nonexistent map key at %q",
+                                        strings.Join(parts[:pos+1], "."))
+                        }               
+                default:
+                        return nil, fmt.Errorf(
+                                "Invalid type at %q: expected []interface{} or map[string]interface{}; got %T",
+                                strings.Join(parts[:pos+1], "."), cfg)
+                }               
+        }       
+        
+        return cfg, nil
+}

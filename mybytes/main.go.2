@@ -1,0 +1,64 @@
+package main
+
+import (
+	"fmt"
+	"sort"
+	"bytes"
+)
+
+func main() {
+        var buf *bytes.Buffer;       // no allocation is performed - only states that buf must be a pointer to bytes.Buffer when allocated later on
+	var buf2 bytes.Buffer;	     // allocation is performed - however all  methods & functions assoicated with bytes.Buffer require or return *bytes.Buffer - so this 
+				     //  declaration is not very useful unless we take & and assign it to another * var.:w
+
+        buf = &buf2
+	if buf == nil {
+        	fmt.Printf("\n Type  %T  %#v- is nill (no allocation)\n" ,buf,buf );
+	} else {
+        	fmt.Printf("\n Type  %T,   pointer  %p \n",buf, buf);
+	}
+        fmt.Printf("\n buf2 Type pointer %p   %T  %#v- is nill (no allocation)\n" ,&buf2,buf2, buf2 );
+
+	//buf = new(bytes.Buffer)
+	//buf = bytes.NewBuffer([]byte{'C','A','1'})
+
+	fmt.Printf("\n contains: %c \n ",buf.Bytes())
+
+	if buf == nil {
+        	fmt.Printf("\n Type  %T  - is nill (no allocation)\n" ,buf);
+	} else {
+        	fmt.Printf("\n Type  %T,   pointer  %p  BUT NO UNDERLYING ARRAY OF []byte allocated:   len %d , cap  %d,  %#v\n",buf, buf, buf.Len() , buf.Cap(), buf);
+	}
+	var w []byte = []byte{'A','B','C'}
+
+	_,err:=buf.Write(w)
+        if err != nil {
+		panic(err)
+	}
+
+        fmt.Printf("\n Type  %T,   pointer  %p  BUT NO UNDERLYING ARRAY OF []byte allocated:   len %d , cap  %d,  %#v\n",buf, buf, buf.Len() , buf.Cap(), buf);
+
+	fmt.Printf("\n written: %c \n ",buf.Bytes())
+
+        //fmt.Printf("\n Type  %T,   len  %d \n",buf2, &(buf2).Len());
+	a := []string{"1", "2","3", "4", "6", "8", "9"}
+	x := "5"
+	var exact bool
+//        f:=bytes.Compare([]byte("35"),[]byte("3"))
+        //fmt.Println(f)
+	i := sort.Search(len(a), func(i int) bool {
+                ret := bytes.Compare([]byte(a[i]),[]byte(x))
+                if ret == 0 {
+                        exact = true
+                }
+              fmt.Println(a[i],x,ret,exact,(ret!=1))
+                return ret != -1 
+        })
+
+        if !exact && i > 0 {
+               fmt.Println("i--",i)
+		i--
+               fmt.Println("i--",i)
+	}
+        fmt.Printf("exact %v, i=%d,  x=%s  %v", exact,i,x,a)
+}

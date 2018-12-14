@@ -1,0 +1,68 @@
+package main
+
+
+import (
+	"context"
+	"fmt"
+	"time"
+	"reflect"
+)
+
+type stringer interface {
+        String() string
+}
+
+
+func main() {
+	// gen generates integers in a separate goroutine and
+	// sends them to the returned channel.
+	// The callers of gen need to cancel the context once
+	// they are done consuming generated integers not to leak
+	// the internal goroutine started by gen.
+	gen := func(ctx context.Context) <-chan int {
+	       
+		dst := make(chan int)
+		n := 1
+		go func() {
+			for {
+				select {
+				case <-ctx.Done():
+				        fmt.Println("cancel received..")
+					return // returning not to leak the goroutine
+				case dst <- n:
+				        time.Sleep(1*time.Second)
+					n++
+				}
+			}
+		}()
+		return dst
+	}
+        var ctx    context.Context            // interface  - only there methods can be called on ctx:  Deadline(), Done(), Err() , Value()
+        var cancel context.CancelFunc
+        //var xx     context.cancelCtx          // cannot refer to unexported name context.cancelCtx
+
+	ctx, cancel = context.WithCancel(context.Background())  // context.cancelCtx is the concrete type for the interface value.
+	
+	defer cancel() // cancel when we are finished consuming integers
+	
+	fmt.Println(reflect.TypeOf(ctx).Elem() )     
+	if v,ok := ctx.(stringer); ok {                 // use type assertion to access other methods in the concrete type not associated with Context.
+          fmt.Println("ctx satisfies string()")  
+          fmt.Println(v.String()) 
+        } else {
+          fmt.Println("ctx does not satisfy stringer")
+        }
+
+	for n := range gen(ctx) {
+		fmt.Println(n)
+		switch n {
+		 case 2:
+		      cancel()
+		time.Sleep(4*time.Second)
+		      fmt.Println("Calling cancellation.")
+		      return
+		 case 3: 
+		      break
+		}
+	}
+}

@@ -1,0 +1,95 @@
+package main
+
+import (
+  "context"
+  "flag"
+  "fmt"
+  "log"
+  "encoding/json"
+
+  "github.com/dgraph-io/dgraph/client"
+  "github.com/dgraph-io/dgraph/protos/api"
+  "google.golang.org/grpc"
+)
+
+var (
+  dgraph = flag.String("d", "ec2-54-252-186-201.ap-southeast-2.compute.amazonaws.com:9080", "Dgraph server address")
+)
+
+func main() {
+  flag.Parse()
+  conn, err := grpc.Dial(*dgraph, grpc.WithInsecure())
+  if err != nil {
+    log.Fatal(err)
+  }
+  defer conn.Close()
+
+  dg := client.NewDgraphClient(api.NewDgraphClient(conn))
+  
+  resp, err := dg.NewTxn().Query(context.Background(), `{
+  bladerunner(func: eq(name@en, "Blade Runner")) {
+    uid
+    name@en
+    initial_release_date
+    netflix_id
+  }
+}`)
+  
+  if err != nil {
+    log.Fatal(err)
+  }
+  fmt.Printf("Response: %s  \n",string(resp.Json))
+  //fmt.Printf("%c",resp.Json)
+
+  //  note JSON output  {  name :  value } where value is an array of objects ie. [ object ] 
+
+  // Response: {"bladerunner":[{"uid":"0xedde","name@en":"Blade Runner","initial_release_date":"1982-06-25T00:00:00Z"}]}
+
+  //
+  // Now decode into Go struct
+  //
+  type linet struct {
+		  Uid   string   `json:"uid"`
+		  Name  string     `json:"name@en"`
+                  Rdate  string    `json:"initial_release_date"`}
+
+  type outt struct {  Name  []*linet   `json:"bladerunner"` }          // go's json decode will return a pointer to array so we must define a slice of pointers.
+	
+  // type outt struct {  Name  []*linet   }                            // this does not work, must use tag to pick up name
+  // type outt struct {  bladerunner  []*linet   }                     // this may  work?? 
+
+  var lines2 outt   // var lines2 outt = outt{}
+
+  if  err:=json.Unmarshal([]byte(resp.Json),&lines2); err != nil {      // pass in pointer so struct can be populated inplace.
+	panic(err)
+  }
+
+  for _,l := range lines2.Name {
+  //for _,l := range lines2.bladerunner {
+	fmt.Printf("%#v",*l)
+  } 
+
+  //fmt.Printf("\n Uid = %s", lines2.bladerunner[0].Uid)
+  //fmt.Printf("\n Name = %s", lines2.bladerunner[0].Name)
+  //fmt.Printf("\n Rdate = %s", lines2.bladerunner[0].Rdate)
+
+  //fmt.Printf("\n Uid = %s", lines2.Name[0].Uid)
+  //fmt.Printf("\n Name = %s", lines2.Name[0].Name)
+  //fmt.Printf("\n Rdate = %s", lines2.Name[0].Rdate)
+
+  //fmt.Printf("\n Uid = %s", lines2.Name[0].Uid)
+  //fmt.Printf("\n Name = %s", lines2.Name[0].Name)
+  //fmt.Printf("\n Rdate = %s", lines2.Name[0].Rdate)
+  
+/*
+  linetv := *lines2.Name[0]
+  
+  fmt.Printf("\n Uid = %s", linetv.Uid)
+  fmt.Printf("\n Name = %s", linetv.Name)
+  fmt.Printf("\n Rdate = %s", linetv.Rdate)
+  
+  fmt.Printf("\n Uid = %s", (*lines2.Name[0]).Uid)
+  fmt.Printf("\n Name = %s", (*lines2.Name[0]).Name)
+  fmt.Printf("\n Rdate = %s", (*lines2.Name[0]).Rdate)
+*/
+}

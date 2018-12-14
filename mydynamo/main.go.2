@@ -1,0 +1,128 @@
+package main
+
+import (
+	"fmt"
+	"log"
+
+	"github.com/aws/aws-sdk-go/service/dynamodb/dynamodbattribute"
+	_ "github.com/aws/aws-sdk-go/service/dynamodb"
+	_ "github.com/aws/aws-sdk-go/service/dynamodb/expression"
+	)
+
+    //  Marshaling is all about taking a Go datatype and building a dynamodb  AttributeValue -  which is  a struct containing all the dynamodb datatype plus values
+    //   when populated. An AttributeValue represents the data for a dynamodb attribute, which inturn makes up a dynamodb item.
+    //   
+    //  type AttributeValue struct has these fields....
+    //
+    // Dynamo DataType        AttributeValue representation                 Struct field name and type 
+    // -------------------   --------------------------------------------   ------------------------------------
+    // Binary.               "B": "dGhpcyB0ZXh0IGlzIGJhc2U2NC1lbmNvZGVk"    B []byte `type:"blob"`
+    //
+    // Boolean.              "BOOL": true                                 BOOL *bool `type:"boolean"`
+    //
+    // Binary Set.           "BS": ["U3Vubnk=", "UmFpbnk=", "U25vd3k="]     BS [][]byte `type:"list"`
+    //
+    // List.                 "L": ["Cookies", "Coffee", 3.14159]             L []*AttributeValue `type:"list"`               All slices map to this
+    //
+    // Map.                  "M": {"Name": {"S": "Joe"}, "Age": {"N": "35"}} where Name & Age are struct fields
+    //                                                                       M map[string]*AttributeValue `type:"map"`       All structs map to this
+    //
+    // Number.               "N": "123.45"                                   N *string `type:"string"`
+    // 
+    // Number Set.           "NS": ["42.2", "-19", "7.5", "3.14"]           NS []*string `type:"list"`
+    //
+    // Null.                 "NULL": true                                  NULL *bool `type:"boolean"`
+    //
+    // String.               "S": "Hello"                                    S *string `type:"string"`
+    //
+    // String Set.           "SS": ["Giraffe", "Hippo" ,"Zebra"]
+    //
+    // ********  Struct Tags to modify Go datatype -> AtributeValue mapping  *******
+    //
+    // Field is ignored                          Field int      `dynamodbav:"-"`              -  ignore this field 
+    // Field AttributeValue map key "myName"     Field int      `dynamodbav:"myName"`         -  rename field in attributeValue of map[<tagName>]
+    // Field AttributeValue map key "myName",    Field int      `dynamodbav:"myName,omitempty"`
+    //                                           Field int      `dynamodbav:",omitempty"`     -  omit field if empty
+    // Field []string and map                                   `dynamodbav:",omitemptyelem"`
+    // Field will be marshaled as a string       Field int      `dynamodbav:",string"`        -  only value for number types, (int,uint,float) 
+    // Field will be marshaled as a binary set   Field [][]byte `dynamodbav:",binaryset"`
+    // Field will be marshaled as a number set   Field []int    `dynamodbav:",numberset"`
+    // Field will be marshaled as a string set   Field []string `dynamodbav:",stringset"`
+    //                                           Field time.Time `dynamodbav:",unixtime"`
+
+func main () {
+         
+         type Record struct {
+             Bytes   []byte
+             MyField string
+             Letters []string   // `dynamodbav:"myName,omitempty"`   doesn't appear to work in string function
+             Numbers []int      //`dynamodbav:"num",stringset"`
+         }
+         
+         
+         r := Record{
+             Bytes:   []byte{48, 49},
+             MyField: "MyFieldValue",
+             Letters: []string{"a", "b", "c", "d"},
+             Numbers: []int{1, 2, 3},
+         }
+         
+         var rslice []Record
+         
+         rslice = []Record{
+             Record {
+             Bytes:   []byte{48, 49},
+             MyField: "MyFieldValue",
+             Letters: []string{"a", "b", "c", "d"},
+             Numbers: []int{1, 2, 3},
+             },
+             Record {   
+             Bytes:   []byte{40, 41},
+             MyField: "MyNextFieldValue",
+             Letters: []string{"f", "h", "i", "s"},
+             Numbers: []int{9,10,11,12},
+             },
+             }
+
+         type rmapT map[string][]Record			// define map type
+         
+         rmap := make(rmapT)				// allocates a map with a small starting size
+         
+         rmap["ABC"] = rslice				// populate map
+         
+         av, err := dav.Marshal(r)
+         fmt.Println("err", err)
+         fmt.Printf("\n dav.Marshal(r)  of type:  %T\n",av)
+         fmt.Println("\n Marshall of Record\n ")
+         fmt.Println("  Encoded Record into AttributeValue M ie. Map[<FieldName>]*AttributeValue")
+         fmt.Println("     			                           where AttributeValue is {<DT>:<Value>} \n")
+         fmt.Println("     			                           where DT is B (binary),   BOOL,     BS (BinarySet) ")
+         fmt.Println("     			                                       L (List),     M  (Map)  N  (Number)")
+         fmt.Println("     			                                       NS (NuberSet) NULL      S  (string) SS (StringSet)")
+         fmt.Println(" NOTE the following is printed by the string() method of AttributeValue")
+         
+         fmt.Println( av )
+         
+         fmt.Printf("\n Print of individual attribute of Marshall'd Record\n")
+         fmt.Println("av.M[Bytes]", av.M["Bytes"])
+         fmt.Println("av.M[MyField]", av.M["MyField"])
+         fmt.Println("av.M[Letters]", av.M["Letters"])
+         fmt.Println("av.M[Numbers]", av.M["Numbers"])
+         
+         avslice, err := dav.MarshalList(rslice)
+         fmt.Printf("\n MarshalList of slice of rslice  %T\n",avslice)
+         fmt.Printf("\n MarshalList accepts a type of interface{} i.e. a Go-slice-type  and returns []*AttributeValue\n\n")
+         fmt.Printf("%s",avslice)
+         
+         
+         fmt.Printf("\n\n MarshalMap of string of rslice  %T\n",rmap)
+         avmap, err := dav.MarshalMap(rmap)
+         fmt.Printf("\n%s\n\n",avmap)
+         fmt.Printf(`**** avmap["ABC"]`)
+         fmt.Printf("\n\n%s\n",avmap["ABC"])
+         fmt.Printf(`**** avmap["ABC"].L`)
+         fmt.Printf("\n\n%s\n",avmap["ABC"].L)
+         
+         
+         
+}

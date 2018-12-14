@@ -1,0 +1,15 @@
+package main
+
+import (
+	"context"
+	"fmt"
+	"time"
+)
+
+func main() {
+	data:=make([]byte,100)
+	t1:=time.Now()
+	err:=t1.UnmarshalText(data)
+	fmt.Printf("\n%v\n")
+}
+

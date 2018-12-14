@@ -1,0 +1,91 @@
+package main
+
+import (
+      "fmt"
+      "reflect"
+      "unicode/utf8"
+       )
+var genrune []rune
+
+//  string is an immutable sequence of bytes.
+//  Text strings are interpreted as UTF8-encode sequence of Unicode case points - runes.
+//
+func main () {
+
+      s := string("the c\aat sat on the mat")
+      t := s
+      s = "..and now its different"			// reassign new string value.  old string is GC, but it won't be because t is pointing to it
+      fmt.Println("t = ",t)
+      fmt.Println("s = ",s)
+      fmt.Println(s[4:8])
+      fmt.Println("len: ",len(s))          // strings have no cap (capacity) - its just one array all of which is visible.
+      //
+      s = "go/src/gopl.io" + t
+      fmt.Println(s[4:8])
+      fmt.Println("len: ",len(s))
+      //
+      s2 := s[:5]                         // new string
+      fmt.Println(s2)
+      fmt.Println("len: ",len(s2))
+      fmt.Printf("%T\n",s2)
+      //
+      s = "Left foot"
+      t = s					// t shares underlying array with s. 
+      s += ", right foot"
+      fmt.Println("len s: ",len(s),s) 
+      fmt.Println("len t: ",len(t),t)
+      t += "..here"				// go will allocate new underlying array to t, as s already shares the array.
+      fmt.Println("len s: ",len(s),s) 
+      fmt.Println("len t: ",len(t),t)
+      //
+      ps , pt := &s, &t                    // pointers to string 
+      fmt.Println("*ps : ",*ps)
+      fmt.Println("*pt : ",*pt)
+      fmt.Printf("ps: %p\n",ps);
+      fmt.Printf("pt: %p\n",pt);
+      if ps == pt {
+         fmt.Println(" ps == pt")
+      } else {
+         fmt.Println(" ps != pt")        // ptrs are different - even though they have same underlying representation.
+      }                                  // is the ptr pointing to the struct {data,len}??
+      //
+      t2 := t[5:8]
+      pt2 := &t2
+      fmt.Println(*pt2, *pt)
+      fmt.Printf("pt2 type: %T\n",pt2);
+      fmt.Printf("pt : %p\n",pt);
+      fmt.Printf("pt2: %p\n",pt2);
+      if pt == pt2 {
+         fmt.Println(" pt == pt2")
+      } else {
+         fmt.Println(" pt != pt2")
+      }
+      //
+      rt:=reflect.TypeOf(pt)
+      rtelem := rt.Elem();
+      fmt.Println("Kind():  ",rt.Kind())
+      fmt.Println("TypeOf(pt).ELem(): ",rtelem.Kind())
+      //
+     const nihongo = "日本語"
+     // strings are simply an ordered sequence of bytes []byte
+     // only string literals & Go code are interpreted as UTF8
+     for i:=0; i<len(nihongo); i++ {
+           fmt.Printf("%d  %X %d %c\n",i,nihongo[i], nihongo[i],nihongo[i])
+     } 
+     // range operator interpretes string as UTF8
+     for index, runeValue := range nihongo {
+           fmt.Printf("%#U starts at byte position %d\n", runeValue, index)
+    }
+    // alternatively, use unicate/utf8 package to interpret string as UTF8
+    fmt.Println(" alternatively, use unicate/utf8 package to interpret string as UTF8")
+    for i, w := 0, 0; i < len(nihongo); i += w {
+        runeValue, width := utf8.DecodeRuneInString(nihongo[i:])
+        fmt.Printf("%#U starts at byte position %d\n", runeValue, i)
+        w = width
+    }
+	//
+	s3:="Abc\r\n\tdef"
+	fmt.Printf("%d %s\n",len(s3),s3)
+	s3 =`Abc\r\n\tdef`
+	fmt.Printf("%d %s\n",len(s3),s3)
+}
