@@ -1,0 +1,16 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Resources:
+  TestFunction:
+    Properties:
+      CodeUri: s3://lambda-deploy-virginia/933dfae39bbb8f3e10474f4fe720a483
+      Events:
+        testAPIG:
+          Properties:
+            Method: get
+            Path: /
+          Type: Api
+      Handler: main
+      Role: arn:aws:iam::631795995269:role/lambda_basic_execution_with_dyno
+      Runtime: go1.x
+    Type: AWS::Serverless::Function
+Transform: AWS::Serverless-2016-10-31

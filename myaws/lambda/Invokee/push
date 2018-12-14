@@ -1,0 +1,5 @@
+GOOS=linux GOARCH=amd64 go build -o main main.go
+rm *zip
+zip main.zip main
+./cf-package.sh
+./cf-deploy.sh

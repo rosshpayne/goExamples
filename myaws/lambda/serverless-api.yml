@@ -1,0 +1,16 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Resources:
+  TestFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+     Handler: main
+     Runtime: go1.x
+     CodeUri: /home/ec2-user/environment/projects/lambda4/main.zip
+     Role: arn:aws:iam::631795995269:role/lambda_basic_execution_with_dyno
+     Events:
+       testAPIG:
+         Type: Api
+         Properties:
+           Path: /
+           Method: get
