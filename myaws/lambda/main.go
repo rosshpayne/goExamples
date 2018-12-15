@@ -19,6 +19,11 @@ type output_ struct {
 	Answer string
 }
 
+type input_ struct {
+	YourName string `json:"What is your name?"`
+	Age      int    `json:"How old are you?"`
+}
+
 //func LongRunningHandler(ctx context.Context) (output_, error) {
 func Handler(ctx context.Context, request events.APIGatewayProxyRequest) (events.APIGatewayProxyResponse, error) {
 
@@ -27,17 +32,29 @@ func Handler(ctx context.Context, request events.APIGatewayProxyRequest) (events
 	deadline = deadline.Add(-100 * time.Millisecond)
 	//CChannel := time.After(time.Until(deadline))
 
-	svc := lda.New(session.New())
-	jsonInput := `{ "What is your name?": "Jim", "How old are you?": 33 } `
-	b64encoded := base64.StdEncoding.EncodeToString([]byte(jsonInput))
+	config := aws.NewConfig().WithLogLevel(aws.LogDebugWithHTTPBody)
+	sess, err := session.NewSession(config)
+	if err != nil {
+		panic(err)
+	}
+	svc := lda.New(sess)
+	//svc := lda.New(session.NewSession(&aws.Config{Region:, Loglevel: aws.LogDebugWithHTTPBody}))
+
+	ctxInput := `{ "NameX": "ValueY" } `
+	b64encoded := base64.StdEncoding.EncodeToString([]byte(ctxInput))
 	b64json_ := aws.String(b64encoded)
 
+	myInput := input_{"Rossco", 21}
+	payload_, err := json.Marshal(&myInput)
+	if err != nil {
+		panic(err)
+	}
 	input := &lda.InvokeInput{
-		ClientContext: b64json_,
+		ClientContext: b64json_, // internally base64 encoded and attached to header: X-Amz-Client-Context: eyAiTmFtZVgiOiAiVmFsdWVZIiB9IA==
 		FunctionName:  aws.String("test-lambda-stack-3-TestFunction-Z4VCSGXF6KBQ"),
 		//InvocationType: aws.String("Event"),  // default is synchronous
 		LogType: aws.String("Tail"),
-		Payload: []byte(jsonInput), //*json_),
+		Payload: payload_,
 		//   Qualifier:      aws.String("1"),
 	}
 	result, err := svc.Invoke(input)
