@@ -2,6 +2,7 @@ package main
 
 import (
 	"context"
+	"encoding/base64"
 	"encoding/json"
 	"fmt"
 	"github.com/aws/aws-lambda-go/events"
@@ -27,14 +28,16 @@ func Handler(ctx context.Context, request events.APIGatewayProxyRequest) (events
 	//CChannel := time.After(time.Until(deadline))
 
 	svc := lda.New(session.New())
-	//json_:=aws.String(`{ "What is your name?": "Jim", "How old are you?": 33 }x `)
-	//fmt.Println("Json: ",*json_)
+	jsonInput := `{ "What is your name?": "Jim", "How old are you?": 33 } `
+	b64encoded := base64.StdEncoding.EncodeToString([]byte(jsonInput))
+	b64json_ := aws.String(b64encoded)
+
 	input := &lda.InvokeInput{
-		ClientContext: aws.String("MyApp"),
+		ClientContext: b64json_,
 		FunctionName:  aws.String("test-lambda-stack-3-TestFunction-Z4VCSGXF6KBQ"),
 		//InvocationType: aws.String("Event"),  // default is synchronous
 		LogType: aws.String("Tail"),
-		Payload: []byte(nil), //*json_),
+		Payload: []byte(jsonInput), //*json_),
 		//   Qualifier:      aws.String("1"),
 	}
 	result, err := svc.Invoke(input)
@@ -101,9 +104,9 @@ func Handler(ctx context.Context, request events.APIGatewayProxyRequest) (events
 	exchange := output_{}
 	err = json.Unmarshal(result.Payload, &exchange)
 	if err != nil {
-		exchange = output_{Answer: "Ross is 60 years old"}
+		panic(err)
 	}
-	exchange = output_{Answer: "Ross is 70 years old"}
+	//exchange = output_{Answer: "Ross is 70 years old"}
 	fmt.Println("Exchange: ", exchange.Answer)
 
 	return events.APIGatewayProxyResponse{

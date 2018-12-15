@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+
 	"github.com/aws/aws-lambda-go/lambda"
 )
 
@@ -14,8 +15,10 @@ type MyResponse struct {
 	Message string `json:"Answer"`
 }
 
+// AWS lambda does the Unmarshalling when invoking this function
+
 func HandleLambdaEvent(event MyEvent) (MyResponse, error) {
-	fmt.Printf("MyEvent: %#v\n", event)
+	fmt.Printf("event argument: %#v", event)
 	return MyResponse{Message: fmt.Sprintf("%s is %d years old!", event.Name, event.Age)}, nil
 }
 

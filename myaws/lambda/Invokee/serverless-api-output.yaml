@@ -2,7 +2,7 @@ AWSTemplateFormatVersion: '2010-09-09'
 Resources:
   TestFunction:
     Properties:
-      CodeUri: s3://lambda-deploy-virginia/4f1688180635320b8ab9319ea997009b
+      CodeUri: s3://lambda-deploy-virginia/710842019244d7f84282e39331b1f44f
       Handler: main
       Role: arn:aws:iam::631795995269:role/lambda_basic_execution_with_dyno
       Runtime: go1.x

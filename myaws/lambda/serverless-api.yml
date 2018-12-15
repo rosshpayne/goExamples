@@ -6,7 +6,7 @@ Resources:
     Properties:
      Handler: main
      Runtime: go1.x
-     CodeUri: /home/ec2-user/environment/projects/lambda4/main.zip
+     CodeUri: /home/ec2-user/environment/go/src/github.com/goExamples/myaws/lambda/main.zip
      Role: arn:aws:iam::631795995269:role/lambda_basic_execution_with_dyno
      Events:
        testAPIG:

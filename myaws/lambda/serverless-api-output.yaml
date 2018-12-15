@@ -2,7 +2,7 @@ AWSTemplateFormatVersion: '2010-09-09'
 Resources:
   TestFunction:
     Properties:
-      CodeUri: s3://lambda-deploy-virginia/933dfae39bbb8f3e10474f4fe720a483
+      CodeUri: s3://lambda-deploy-virginia/6f5cb8017534bb63536d128a77074f1d
       Events:
         testAPIG:
           Properties:
