@@ -75,4 +75,54 @@ func main() {
 	fmt.Printf("\n%#v %[1]T", animals)
 }
 
+	type mapT map[string]*string
+	type mapiT map[string]interface{}
+	
+	type ColorGroup struct {
+		ID     int
+		Name   string
+		Colors []string
+	}
+	group := ColorGroup{
+		ID:     1,
+		Name:   "Reds",
+		Colors: []string{"Crimson", "Red", "Ruby", "Maroon"},
+	}
+	b, err := json.Marshal(group)
+	if err != nil {
+		fmt.Println("error:", err)
+	}
+	os.Stdout.Write(b)
+	
+	m:=make(mapT)
+	name:="ross payne"
+	m["name"]=&name
+	age:="61"
+	m["age"] =&age
+	place:="canberra"
+	m["place"]=&place
+	
+	fmt.Println()
+	c,err:=json.Marshal(m)
+		if err != nil {
+		fmt.Println("error:", err)
+	}
+	
+	os.Stdout.Write(c)
+	
+	i:=make(mapiT)
+	i["name"]=&name
+	i["name2"]="payl apyne"
+	i["age"]=53
+	i["Place"]=&place
+	
+	fmt.Println()
+	d,err:=json.Marshal(i)
+		if err != nil {
+		fmt.Println("error:", err)
+	}
+	
+	os.Stdout.Write(d)
+	
+}
 }
